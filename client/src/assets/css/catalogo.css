@@ -1,0 +1,269 @@
+/* Sección filtros */
+.filters-section {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+.filters-section h2 {
+  margin-bottom: 15px;
+  color: #8B0000;
+}
+#filter-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(200px,1fr));
+  gap: 15px;
+}
+.filter-group label {
+  font-weight: 500;
+  margin-bottom: 5px;
+  display: block;
+}
+.filter-group input,
+.filter-group select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+/* Grid de gorras */
+.catalogo-grid {
+    margin-top: 30px;
+}
+
+.gorras-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+
+/* Tarjeta de gorras */
+.gorras-card {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.gorras-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.gorras-imagen {
+    height: 200px;
+    overflow: hidden;
+}
+
+.gorras-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.gorras-card:hover .gorras-imagen img {
+    transform: scale(1.05);
+}
+
+.gorras-info {
+    padding: 15px;
+}
+
+.gorras-tipo {
+    display: inline-block;
+    background-color: #FFD700;
+    color: #333;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin: 5px 0;
+    font-weight: 500;
+}
+
+.gorras-peso, .gorras-precio, .gorras-fecha {
+    font-size: 0.9rem;
+}
+
+.gorras-precio {
+    color: #8B0000;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .filtros-form {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+/* Tipografía */
+h1, h2, h3 {
+    color: #8B0000;
+    margin-bottom: 15px;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+/* Header */
+.main-header {
+    background-color: #8B0000;
+    color: white;
+    padding: 15px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+}
+
+.main-nav li {
+    margin-left: 20px;
+}
+
+.main-nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.main-nav a:hover, .main-nav a.active {
+    color: #FFD700;
+}
+
+/* Botones */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: none;
+}
+
+.btn-filtrar {
+    background-color: #8B0000;
+    color: white;
+    align-self: flex-end;
+}
+
+.btn-filtrar:hover {
+    background-color: #6B0000;
+}
+
+/* Formularios */
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+/* Footer */
+.main-footer {
+    background-color: #333;
+    color: white;
+    padding: 20px 0;
+    margin-top: 40px;
+}
+
+.main-footer p {
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main-nav ul {
+        margin-top: 15px;
+        justify-content: center;
+    }
+
+    .main-nav li {
+        margin: 0 10px;
+    }
+}
+/* Dropdown */
+.dropdown {
+  position: relative;
+}
+.dropbtn {
+  background: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 6px 10px;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 30px;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+  z-index: 10;
+}
+.dropdown-content a {
+  display: block;
+  padding: 8px 12px;
+  color: #333;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.dropdown-content a:hover {
+  background: #f2f2f2;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}

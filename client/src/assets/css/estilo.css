@@ -1,0 +1,434 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body {
+  background: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
+}
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Header */
+.custom-header {
+  background-color: #8B0000 !important;
+}
+
+.custom-footer {
+  background-color: #8B0000 !important;
+}
+
+.main-header {
+  background: #8B0000;
+  color: #fff;
+  padding: 10px 0;
+  position: relative;
+}
+.main-header .container {
+  display: flex;
+  align-items: center;
+}
+.logo img {
+  height: 50px;
+}
+.search-bar {
+  flex: 1;
+  display: flex;
+  margin: 0 20px;
+}
+.search-bar input {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  border-radius: 4px 0 0 4px;
+}
+.search-bar .btn-search {
+  padding: 8px 12px;
+  border: none;
+  background: #FFD700;
+  cursor: pointer;
+  border-radius: 0 4px 4px 0;
+}
+.main-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+}
+.main-nav a {
+  color: #fff;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+.main-nav a:hover,
+.main-nav a.active {
+  background: #FFD700;
+  color: #8B0000;
+}
+
+/* User actions & Cart button */
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.btn-cart {
+  background: transparent;
+  border: 2px solid #FFD700;
+  color: #FFD700;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn-cart:hover {
+  background: #FFD700;
+  color: #8B0000;
+}
+
+/* Dropdown */
+.dropdown {
+  position: relative;
+}
+.dropbtn {
+  background: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 6px 10px;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 30px;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+  z-index: 10;
+}
+.dropdown-content a {
+  display: block;
+  padding: 8px 12px;
+  color: #333;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.dropdown-content a:hover {
+  background: #f2f2f2;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Footer */
+.main-footer {
+  background: #333;
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* Estilos generales para todas las tablas */
+.tabla-factura, 
+.tabla-productos {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Cabeceras de tabla */
+.tabla-factura thead tr,
+.tabla-productos thead tr {
+    background-color: #dd5c28; /* Gris oscuro que combina con tu header */
+    color: white;
+    text-align: left;
+}
+
+.tabla-factura th,
+.tabla-productos th {
+    padding: 12px 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+}
+
+/* Celdas del cuerpo */
+.tabla-factura td,
+.tabla-productos td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #e0e0e0;
+    vertical-align: middle;
+}
+
+/* Filas alternas para mejor legibilidad */
+.tabla-factura tbody tr:nth-child(even),
+.tabla-productos tbody tr:nth-child(even) {
+    background-color: #f8f9fa; /* Gris muy claro */
+}
+
+/* Efecto hover para filas */
+.tabla-factura tbody tr:hover,
+.tabla-productos tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Pie de tabla */
+.tabla-factura tfoot tr,
+.tabla-productos tfoot tr {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+/* Fila de total especial */
+.tabla-factura tfoot tr.total,
+.tabla-productos tfoot tr.total {
+    background-color: #e9ecef;
+    color: #212529;
+    font-size: 1rem;
+}
+
+/* Botones dentro de tablas */
+.tabla-factura .btn,
+.tabla-productos .btn {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    margin: 2px;
+}
+
+/* Ajustes específicos para tabla de carrito */
+.tabla-factura input[type="number"] {
+    width: 70px;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+/* Ajustes para tabla de resumen de pedido */
+.tabla-productos {
+    background-color: white;
+}
+
+/* Estilos para la tabla en el detalle de venta */
+.contenedor-detalle-venta .tabla-productos {
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .tabla-factura, 
+    .tabla-productos {
+        display: block;
+        overflow-x: auto;
+    }
+    
+    .tabla-factura th,
+    .tabla-productos th,
+    .tabla-factura td,
+    .tabla-productos td {
+        padding: 8px 10px;
+    }
+}
+/* Estilos base para ambos formularios */
+.auth-container {
+  padding: 40px 0;
+  display: flex;
+  justify-content: center;
+  min-height: 70vh;
+}
+
+.auth-form {
+  background: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin: 20px;
+}
+
+.auth-form h1 {
+  margin-bottom: 25px;
+  color: #8B0000; /* Rojo oscuro que coincide con tu logo */
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+/* Grupos de formulario */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #333;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+  border-color: #8B0000;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.1);
+}
+
+/* Botones */
+.btn-login,
+.btn-submit,
+#btnRegistrar {
+  width: 100%;
+  padding: 12px;
+  background: #8B0000;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: 15px;
+  transition: background-color 0.3s;
+}
+
+.btn-login:hover,
+.btn-submit:hover,
+#btnRegistrar:hover {
+  background: #6B0000;
+}
+
+/* Contraseña */
+.password-input {
+  display: flex;
+  gap: 5px;
+}
+
+.password-input input {
+  flex: 1;
+}
+
+.password-input #show-password {
+  padding: 0 15px;
+  border: 1px solid #ddd;
+  background: #f8f9fa;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.3s;
+}
+
+.password-input #show-password:hover {
+  background: #e9ecef;
+}
+
+/* Enlaces */
+.auth-links,
+#formRegistro p {
+  margin-top: 20px;
+  text-align: center;
+  color: #555;
+}
+
+.auth-links a,
+#formRegistro a {
+  color: #8B0000;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-links a:hover,
+#formRegistro a:hover {
+  text-decoration: underline;
+}
+
+/* Modal recuperar contraseña */
+#modalRecuperar .modal-content {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#modalRecuperar .modal-header {
+  background-color: #8B0000;
+  color: white;
+}
+
+#modalRecuperar .btn-success {
+  background-color: #006400;
+  border: none;
+}
+
+#modalRecuperar .btn-success:hover {
+  background-color: #008000;
+}
+/* Estilos para los botones del carrito */
+.acciones-carrito {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.btn-vaciar,
+.btn-pagar {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-vaciar {
+  background-color: #ccc;
+  color: #333;
+}
+
+.btn-vaciar:hover {
+  background-color: #b3b3b3;
+  color: #000;
+}
+
+.btn-pagar {
+  background-color: #8B0000;
+  color: #fff;
+}
+
+.btn-pagar:hover {
+  background-color: #6B0000;
+  color: #fff;
+}
+
+/* Diseño responsivo */
+@media (max-width: 576px) {
+  .auth-form {
+    padding: 20px;
+    margin: 10px;
+  }
+  
+  .auth-form h1 {
+    font-size: 1.5rem;
+  }
+}
