@@ -16,13 +16,13 @@ app.use(cors({
 
 // Middleware para parsear JSON
 app.use(express.json());
-
+/*
 // Servir archivos estáticos desde la carpeta client (para desarrollo)
 app.use('/img', express.static(path.join(__dirname, '../client/public/img')));
 
 // Servir archivos estáticos desde build (para producción)
 app.use(express.static(path.join(__dirname, '../client/build')));
-
+*/
 // Conectar a MongoDB y ejecutar datos iniciales
 const iniciarServidor = async () => {
   try {
@@ -34,7 +34,7 @@ const iniciarServidor = async () => {
 
     // Usar rutas
     app.use('/api', routes);
-/*
+
     // Ruta para servir la aplicación React (para producción)
     if (process.env.NODE_ENV === 'production') {
       // Sirve archivos estáticos del build de React
@@ -46,7 +46,6 @@ const iniciarServidor = async () => {
         res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
       });
     }
-      */
     const PORT = process.env.PORT || 5001;
     app.listen(PORT, () => {
       console.log(`Servidor ejecutándose en puerto ${PORT}`);
