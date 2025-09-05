@@ -38,7 +38,8 @@ const iniciarServidor = async () => {
     // Ruta para servir la aplicación React (para producción)
     if (process.env.NODE_ENV === 'production') {
       // Sirve archivos estáticos del build de React
-      app.use(express.static(path.join(__dirname, 'client/build')));
+      app.use(express.static(path.join(__dirname, '../client/build')));
+
       
       // Maneja todas las demás rutas devolviendo el index.html
       app.get('*', (req, res) => {
