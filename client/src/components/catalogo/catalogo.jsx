@@ -269,7 +269,7 @@ const Catalogo = () => {
                   <div className="gorras-imagen">
                   <Card.Img 
                     variant="top" 
-                    src={gorra.imagen || '/img/gorra-default.jpg'} 
+                    src={gorra.imagen ? `${process.env.REACT_APP_API_URL}${gorra.imagen}` : '/img/gorra-default.jpg'} 
                     alt={gorra.nombre}
                     onError={(e) => {
                       e.target.src = '/img/gorra-default.jpg';
