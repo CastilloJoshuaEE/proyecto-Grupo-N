@@ -78,7 +78,7 @@ const Detalle = () => {
           <Row className="g-0">
             <Col md={4} className="text-center">
               <img 
-                src={gorra.imagen ? `${process.env.REACT_APP_API_URL}${gorra.imagen}` : '/img/gorra-default.jpg'} 
+                src={gorra.imagen ? `${API_URL}${gorra.imagen}` : '/img/gorra-default.jpg'} 
                 className="img-fluid rounded" 
                 alt={gorra.nombre}
                 style={{ maxHeight: '300px', objectFit: 'cover' }}

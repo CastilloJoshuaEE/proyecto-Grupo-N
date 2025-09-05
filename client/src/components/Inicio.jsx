@@ -85,7 +85,7 @@ const obtenerProductosDestacados = async () => {
                   <Card className="h-100">
                     <Card.Img 
                       variant="top" 
-                      src={producto.imagen  ? `${process.env.REACT_APP_API_URL}${producto.imagen}` : '/img/gorra-default.jpg'} 
+                      src={producto.imagen  ? `${API_URL}${producto.imagen}` : '/img/gorra-default.jpg'} 
                       alt={producto.nombre}
                       style={{ height: '200px', objectFit: 'cover' }}
                     />
