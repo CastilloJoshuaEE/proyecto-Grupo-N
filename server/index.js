@@ -16,13 +16,13 @@ app.use(cors({
 
 // Middleware para parsear JSON
 app.use(express.json());
-/*
+
 // Servir archivos estáticos desde la carpeta client (para desarrollo)
 app.use('/img', express.static(path.join(__dirname, '../client/public/img')));
 
 // Servir archivos estáticos desde build (para producción)
 app.use(express.static(path.join(__dirname, '../client/build')));
-*/
+
 // Conectar a MongoDB y ejecutar datos iniciales
 const iniciarServidor = async () => {
   try {
