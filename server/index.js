@@ -34,7 +34,7 @@ const iniciarServidor = async () => {
 
     // Usar rutas
     app.use('/api', routes);
-
+/*
     // Ruta para servir la aplicación React (para producción)
     if (process.env.NODE_ENV === 'production') {
       // Sirve archivos estáticos del build de React
@@ -46,6 +46,7 @@ const iniciarServidor = async () => {
         res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
       });
     }
+      */
     const PORT = process.env.PORT || 5001;
     app.listen(PORT, () => {
       console.log(`Servidor ejecutándose en puerto ${PORT}`);
