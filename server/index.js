@@ -10,8 +10,8 @@ const app = express();
 
 // Configurar CORS 
 app.use(cors({
-  origin: 'http://localhost:3000', // Permitir solo tu frontend de desarrollo
-  credentials: true // Permitir cookies y autenticación
+  origin: ['http://localhost:3000', 'https://proyecto-grupo-n-frontend.onrender.com'],
+  credentials: true
 }));
 
 // Middleware para parsear JSON
