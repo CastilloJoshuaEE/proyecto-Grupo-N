@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navbar, Nav, Container, Form, Button, Dropdown, Badge } from 'react-bootstrap';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext';
@@ -14,11 +14,15 @@ const Encabezado = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Extraer parámetros de búsqueda actuales de la URL
   const searchParams = new URLSearchParams(location.search);
   const busquedaActual = searchParams.get('busqueda') || '';
 
-  React.useEffect(() => {
-    if (busquedaActual) setBusqueda(busquedaActual);
+  // Si hay una búsqueda actual, establecerla en el estado
+  useEffect(() => {
+    if (busquedaActual) {
+      setBusqueda(busquedaActual);
+    }
   }, [busquedaActual]);
 
   const handleBuscar = (e) => {
@@ -32,9 +36,20 @@ const Encabezado = () => {
     navigate(`/catalogo?${nuevosParams.toString()}`);
   };
 
-  const handleInputChange = (e) => setBusqueda(e.target.value);
-  const handleKeyPress = (e) => e.key === 'Enter' && handleBuscar(e);
-  const handleLogout = () => { logout(); navigate('/'); };
+  const handleInputChange = (e) => {
+    setBusqueda(e.target.value);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleBuscar(e);
+    }
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
 
   const totalItems = carrito.items.reduce((total, item) => total + item.cantidad, 0);
 
@@ -47,10 +62,12 @@ const Encabezado = () => {
             alt="Gorras Premium"
             height="50"
             className="d-inline-block align-top"
-            onError={(e) => { e.target.src = '/img/gorra-default.jpg'; }}
+            onError={(e) => {
+              e.target.src = '/img/gorra-default.jpg';
+            }}
           />
         </Navbar.Brand>
-
+        
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         
         <Navbar.Collapse id="basic-navbar-nav">
@@ -65,13 +82,32 @@ const Encabezado = () => {
               onKeyPress={handleKeyPress}
               style={{ minWidth: '300px' }}
             />
-            <Button variant="warning" type="submit">🔍 Buscar</Button>
+            <Button variant="warning" type="submit">
+              🔍 Buscar
+            </Button>
           </Form>
-
+          
           <Nav className="ms-auto">
             <Nav.Link as={Link} to="/">Inicio</Nav.Link>
             <Nav.Link as={Link} to="/catalogo">Catálogo</Nav.Link>
             <Nav.Link as={Link} to="/acerca">Sobre nosotros</Nav.Link>
+            
+            {usuario && (
+              <>
+                {usuario.tipo === 'admin' && (
+                  <>
+                    <Nav.Link as={Link} to="/admin/dashboard">Panel administrativo</Nav.Link>
+                    <Nav.Link as={Link} to="/admin/gorras">Gestión de gorras</Nav.Link>
+                  </>
+                )}
+                {usuario.tipo === 'cliente' && (
+                  <Nav.Link as={Link} to="/historial-pedidos">Historial de pedidos</Nav.Link>
+                )}
+                {usuario.tipo === 'bodeguero' && (
+                  <Nav.Link as={Link} to="/admin/gorras">Gestión de gorras</Nav.Link>
+                )}
+              </>
+            )}
           </Nav>
 
           {/* 🎨 Selector de color */}
@@ -86,18 +122,18 @@ const Encabezado = () => {
               <Dropdown.Item onClick={() => setColorTema("#000000")}>
                 ⚫ Negro
               </Dropdown.Item>
-                            <Dropdown.Item onClick={() => setColorTema("#00BFFF")}>
+              <Dropdown.Item onClick={() => setColorTema("#00BFFF")}>
                 🔵 Celeste
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
-
-          {/* Mi cuenta y carrito */}
+          
           <Nav className="ms-3">
             <Dropdown align="end">
-              <Dropdown.Toggle variant="outline-light">
+              <Dropdown.Toggle variant="outline-light" id="dropdown-basic">
                 {usuario ? usuario.nombre : 'Mi cuenta'}
               </Dropdown.Toggle>
+
               <Dropdown.Menu>
                 {!usuario ? (
                   <>
@@ -113,12 +149,21 @@ const Encabezado = () => {
                 )}
               </Dropdown.Menu>
             </Dropdown>
-
+            
             {usuario && (
-              <Button as={Link} to="/carrito" variant="outline-warning" className="ms-2 position-relative">
+              <Button 
+                as={Link} 
+                to="/carrito" 
+                variant="outline-warning" 
+                className="ms-2 position-relative"
+              >
                 🛒 Mi carrito
                 {totalItems > 0 && (
-                  <Badge bg="danger" pill className="position-absolute top-0 start-100 translate-middle">
+                  <Badge 
+                    bg="danger" 
+                    pill 
+                    className="position-absolute top-0 start-100 translate-middle"
+                  >
                     {totalItems}
                   </Badge>
                 )}
