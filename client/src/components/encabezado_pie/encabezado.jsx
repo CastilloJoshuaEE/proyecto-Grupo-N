@@ -3,61 +3,43 @@ import { Navbar, Nav, Container, Form, Button, Dropdown, Badge } from 'react-boo
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext';
 import { useCarrito } from '../context/CarritoContext';
+import { FaPalette } from 'react-icons/fa';
+import { useTheme } from '../context/ThemeContext';
 
 const Encabezado = () => {
   const [busqueda, setBusqueda] = useState('');
+  const { colorTema, setColorTema } = useTheme(); 
   const { usuario, logout } = useAuth();
   const { carrito } = useCarrito();
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Extraer parámetros de búsqueda actuales de la URL
   const searchParams = new URLSearchParams(location.search);
   const busquedaActual = searchParams.get('busqueda') || '';
 
-  // Si hay una búsqueda actual, establecerla en el estado
   React.useEffect(() => {
-    if (busquedaActual) {
-      setBusqueda(busquedaActual);
-    }
+    if (busquedaActual) setBusqueda(busquedaActual);
   }, [busquedaActual]);
 
   const handleBuscar = (e) => {
     e.preventDefault();
+    const nuevosParams = new URLSearchParams(location.search);
     if (busqueda.trim()) {
-      // Crear nuevos parámetros de búsqueda manteniendo los existentes
-      const nuevosParams = new URLSearchParams(location.search);
       nuevosParams.set('busqueda', busqueda.trim());
-      
-      navigate(`/catalogo?${nuevosParams.toString()}`);
     } else {
-      // Si la búsqueda está vacía, eliminar el parámetro de búsqueda
-      const nuevosParams = new URLSearchParams(location.search);
       nuevosParams.delete('busqueda');
-      
-      navigate(`/catalogo?${nuevosParams.toString()}`);
     }
+    navigate(`/catalogo?${nuevosParams.toString()}`);
   };
 
-  const handleInputChange = (e) => {
-    setBusqueda(e.target.value);
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      handleBuscar(e);
-    }
-  };
-
-  const handleLogout = () => {
-    logout();
-    navigate('/');
-  };
+  const handleInputChange = (e) => setBusqueda(e.target.value);
+  const handleKeyPress = (e) => e.key === 'Enter' && handleBuscar(e);
+  const handleLogout = () => { logout(); navigate('/'); };
 
   const totalItems = carrito.items.reduce((total, item) => total + item.cantidad, 0);
 
   return (
-    <Navbar bg="dark" variant="dark" expand="lg" className="custom-header">
+    <Navbar expand="lg" style={{ backgroundColor: colorTema }} variant="dark" className="custom-header">
       <Container>
         <Navbar.Brand as={Link} to="/">
           <img
@@ -65,12 +47,10 @@ const Encabezado = () => {
             alt="Gorras Premium"
             height="50"
             className="d-inline-block align-top"
-            onError={(e) => {
-              e.target.src = '/img/gorra-default.jpg';
-            }}
+            onError={(e) => { e.target.src = '/img/gorra-default.jpg'; }}
           />
         </Navbar.Brand>
-        
+
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         
         <Navbar.Collapse id="basic-navbar-nav">
@@ -85,40 +65,39 @@ const Encabezado = () => {
               onKeyPress={handleKeyPress}
               style={{ minWidth: '300px' }}
             />
-            <Button variant="warning" type="submit">
-              🔍 Buscar
-            </Button>
+            <Button variant="warning" type="submit">🔍 Buscar</Button>
           </Form>
-          
+
           <Nav className="ms-auto">
             <Nav.Link as={Link} to="/">Inicio</Nav.Link>
             <Nav.Link as={Link} to="/catalogo">Catálogo</Nav.Link>
             <Nav.Link as={Link} to="/acerca">Sobre nosotros</Nav.Link>
-            
-            {usuario && (
-              <>
-                {usuario.tipo === 'admin' && (
-                  <>
-                    <Nav.Link as={Link} to="/admin/dashboard">Panel administrativo</Nav.Link>
-                    <Nav.Link as={Link} to="/admin/gorras">Gestión de gorras</Nav.Link>
-                  </>
-                )}
-                {usuario.tipo === 'cliente' && (
-                  <Nav.Link as={Link} to="/historial-pedidos">Historial de pedidos</Nav.Link>
-                )}
-                {usuario.tipo === 'bodeguero' && (
-                  <Nav.Link as={Link} to="/admin/gorras">Gestión de gorras</Nav.Link>
-                )}
-              </>
-            )}
           </Nav>
-          
+
+          {/* 🎨 Selector de color */}
+          <Dropdown className="ms-3">
+            <Dropdown.Toggle variant="outline-light">
+              <FaPalette /> {/* Ícono paleta */}
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Item onClick={() => setColorTema("rgb(51,72,92)")}>
+                🔵 Azul
+              </Dropdown.Item>
+              <Dropdown.Item onClick={() => setColorTema("#000000")}>
+                ⚫ Negro
+              </Dropdown.Item>
+                            <Dropdown.Item onClick={() => setColorTema("#00BFFF")}>
+                🔵 Celeste
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+
+          {/* Mi cuenta y carrito */}
           <Nav className="ms-3">
             <Dropdown align="end">
-              <Dropdown.Toggle variant="outline-light" id="dropdown-basic">
+              <Dropdown.Toggle variant="outline-light">
                 {usuario ? usuario.nombre : 'Mi cuenta'}
               </Dropdown.Toggle>
-
               <Dropdown.Menu>
                 {!usuario ? (
                   <>
@@ -134,21 +113,12 @@ const Encabezado = () => {
                 )}
               </Dropdown.Menu>
             </Dropdown>
-            
+
             {usuario && (
-              <Button 
-                as={Link} 
-                to="/carrito" 
-                variant="outline-warning" 
-                className="ms-2 position-relative"
-              >
+              <Button as={Link} to="/carrito" variant="outline-warning" className="ms-2 position-relative">
                 🛒 Mi carrito
                 {totalItems > 0 && (
-                  <Badge 
-                    bg="danger" 
-                    pill 
-                    className="position-absolute top-0 start-100 translate-middle"
-                  >
+                  <Badge bg="danger" pill className="position-absolute top-0 start-100 translate-middle">
                     {totalItems}
                   </Badge>
                 )}
