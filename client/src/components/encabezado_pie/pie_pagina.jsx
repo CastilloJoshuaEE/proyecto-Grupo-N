@@ -10,7 +10,7 @@ const PiePagina = () => {
       style={{ backgroundColor: colorTema }}
     >
       <Container className="text-center">
-        <p>&copy; 2026 Proyecto con stack de Mern - Grupo N. 
+        <p>&copy; 2025 Proyecto con stack de Mern - Grupo N. 
         Todos los derechos reservados.</p>
         <p className="mb-0">Integrantes: Castillo, Chuquipoma, Espinoza, Ligua, Tomalá </p>
       </Container>
