@@ -111,7 +111,6 @@ exports.obtenerReporteVentas = async (req, res) => {
     });
   }
 };
-// Obtener productos más vendidos (admin)
 exports.obtenerProductosMasVendidos = async (req, res) => {
   try {
     const { fecha_inicio, fecha_fin, limite } = req.query;
@@ -126,11 +125,21 @@ exports.obtenerProductosMasVendidos = async (req, res) => {
     const productosMasVendidos = await Venta.aggregate([
       { $match: matchStage },
       { $unwind: '$items' },
+      // Agregar lookup para obtener información de la gorra
+      {
+        $lookup: {
+          from: 'gorras',
+          localField: 'items.id_gorra',
+          foreignField: '_id',
+          as: 'gorra_info'
+        }
+      },
+      { $unwind: '$gorra_info' },
       {
         $group: {
           _id: '$items.id_gorra',
           nombre: { $first: '$items.nombre' },
-          tipo: { $first: '$items.tipo' }, // Asegurar que el tipo se incluya
+          tipo: { $first: '$gorra_info.tipo' }, // Obtener el tipo de la gorra
           cantidadVendida: { $sum: '$items.cantidad' },
           totalVendido: { $sum: { $multiply: ['$items.cantidad', '$items.precio_unitario'] } }
         }

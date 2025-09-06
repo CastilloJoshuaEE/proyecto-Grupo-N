@@ -174,6 +174,7 @@ ventaSchema.statics.crearVenta = async function(idUsuario, metodoPago, datosTran
   const itemsVenta = carrito.items.map(item => ({
     id_gorra: item.id_gorra._id,
     nombre: item.id_gorra.nombre,
+    tipo: item.id_gorra.tipo, 
     cantidad: item.cantidad,
     precio_unitario: item.precio_unitario,
     subtotal: item.cantidad * item.precio_unitario

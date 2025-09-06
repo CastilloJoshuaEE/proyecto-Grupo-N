@@ -8,6 +8,7 @@ import { toast } from 'react-hot-toast';
 const FinalizarCompra = () => {
   const [carrito, setCarrito] = useState({ items: [], total: 0 });
   const [usuario, setUsuario] = useState(null);
+const [direccionEditada, setDireccionEditada] = useState('');
   const { vaciarCarrito } = useCarrito();
   const [metodoPago, setMetodoPago] = useState('efectivo');
   const [datosTransferencia, setDatosTransferencia] = useState({
@@ -16,6 +17,8 @@ const FinalizarCompra = () => {
   });
   const [showModal, setShowModal] = useState(false);
   const [cargando, setCargando] = useState(true);
+  const [editandoDireccion, setEditandoDireccion] = useState(false);
+
   const { usuario: authUsuario } = useAuth();
   const navigate = useNavigate();
   const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
@@ -67,7 +70,31 @@ const FinalizarCompra = () => {
       setCargando(false);
     }
   };
-// En FinalizarCompra.jsx - Modificar handleSubmit
+  // Función para actualizar la dirección del usuario
+  const actualizarDireccion = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const respuesta = await fetch(`${API_URL}/api/usuario/perfil`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ direccion: direccionEditada })
+      });
+
+      if (respuesta.ok) {
+        const datos = await respuesta.json();
+        if (datos.success) {
+          setUsuario(datos.data);
+          setEditandoDireccion(false);
+          toast.success('Dirección actualizada correctamente');
+        }
+      }
+    } catch (error) {
+      toast.error('Error al actualizar la dirección');
+    }
+  }; 
 const handleSubmit = async (e) => {
   e.preventDefault();
   
@@ -169,15 +196,40 @@ const handleSubmit = async (e) => {
               </Col>
             </Row>
 
-            <Form.Group className="mb-3">
+         <Form.Group className="mb-3">
               <Form.Label>Dirección:</Form.Label>
-              <Form.Control
-                type="text"
-                name="direccion"
-                value={usuario?.direccion || ''}
-                required
-                readOnly
-              />
+              <div className="d-flex align-items-center">
+                <Form.Control
+                  type="text"
+                  name="direccion"
+                  value={direccionEditada}
+                  onChange={(e) => setDireccionEditada(e.target.value)}
+                  required
+                  readOnly={!editandoDireccion}
+                />
+                {editandoDireccion ? (
+                  <Button 
+                    variant="success" 
+                    size="sm" 
+                    className="ms-2"
+                    onClick={actualizarDireccion}
+                  >
+                    ✓
+                  </Button>
+                ) : (
+                  <Button 
+                    variant="outline-primary" 
+                    size="sm" 
+                    className="ms-2"
+                    onClick={() => setEditandoDireccion(true)}
+                  >
+                    ✎
+                  </Button>
+                )}
+              </div>
+              <Form.Text className="text-muted">
+                Haga clic en el ícono de lápiz para editar su dirección de entrega
+              </Form.Text>
             </Form.Group>
 
             <Row>
