@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../components/auth/AuthContext';
 import { useCarrito } from '../components/context/CarritoContext';
 import { toast } from 'react-hot-toast';
+import './Inicio.css';
 
 const Inicio = () => {
   const [productosDestacados, setProductosDestacados] = useState([]);
@@ -59,11 +60,23 @@ const obtenerProductosDestacados = async () => {
   return (
     <>
       <main className="container my-5">
-        <section className="hero bg-light p-5 rounded text-center mb-5">
-          <h1 className="display-4">Las mejores gorras de Ecuador</h1>
-          <p className="lead">Calidad premium desde 2025</p>
-          <Button as={Link} to="/catalogo" variant="primary" size="lg">
-            Ver catálogo
+        <section className="hero-urban p-5 rounded text-center mb-5">
+          <div className="mb-4">
+            <span className="urban-badge">HECHO EN ECUADOR</span>
+          </div>
+          <h1 className="urban-title mb-4">
+            Las mejores <span className="text-highlight">gorras</span><br/>de Ecuador
+          </h1>
+          <p className="urban-subtitle mb-5">
+            Calidad <strong>premium</strong> desde 2025
+          </p>
+          <Button 
+            as={Link} 
+            to="/catalogo" 
+            className="urban-btn"
+            size="lg"
+          >
+            VER CATÁLOGO
           </Button>
         </section>
 
