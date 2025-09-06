@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
+import Accesibilidad from './components/Accesibilidad'; // Importa el nuevo componente
 
 // Componentes
 import Dashboard from './components/admin/dashboard';
@@ -78,6 +79,7 @@ function App() {
             </main>
             <PiePagina />
             <Toaster position="top-right" />
+            <Accesibilidad /> 
           </div>
         </Router>
       </CarritoProvider>

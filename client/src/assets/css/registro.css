@@ -1,63 +1,57 @@
-main {
-  max-width: 600px;
-  margin: auto;
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-}
-label { margin-top:0.5rem; color:black }
-
-form input, form button {
-  display: block;
-  margin-bottom: 10px;
-  padding: 8px;
-  width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+:root{
+  --paper:#fff;
+  --page:#f9f9f9;
+  --line:#e5e7eb;
+  --ink:#0b1220;
+  --brand:#8B0000;
+  --brand-2:#6B0000;
+  --ok:#16a34a;
+  --ok-2:#15803d;
+  --radius:12px;
+  --shadow:0 8px 20px rgba(2,6,23,.08);
 }
 
-form button {
-  background-color: #006400;
-  color: white;
-  border: none;
-  cursor: pointer;
+main{
+  max-width:640px; margin:auto; background:var(--paper);
+  padding: clamp(16px, 3vw, 24px);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border:1px solid var(--line);
 }
 
-form button:hover {
-  background-color: #228B22;
-}
+label{ margin-top:.5rem; color:var(--ink); font-weight:600 }
 
-.card {
-  margin-top: 30px;
+form input, form button{
+  display:block; width:100%; margin-bottom:10px; padding:12px 14px;
+  border:1px solid var(--line); border-radius:10px; font-size:1rem;
 }
+form input:focus{ outline:none; border-color:#cbd5e1; box-shadow:0 0 0 3px rgba(139,0,0,.10); }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-  color:black
+form button{
+  background:var(--ok); color:#fff; border:none; cursor:pointer; font-weight:700;
+  transition:opacity .2s, transform .06s;
 }
+form button:hover{ background:var(--ok-2); }
+form button:active{ transform:translateY(1px) }
 
-table th, table td {
-  border-bottom: 1px solid #ccc;
-  padding: 10px;
-  text-align: left;
-  color:black
-}
+.card{ margin-top:24px; }
 
-table button {
-  background-color: #8B0000;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  color:black
+table{
+  width:100%; border-collapse:collapse; margin-top:12px; color:var(--ink);
+  border:1px solid var(--line); border-radius:12px; overflow:hidden; background:#fff; box-shadow:var(--shadow);
 }
-h2{
-  color:black
+table th, table td{
+  border-bottom:1px solid var(--line); padding:10px 12px; text-align:left;
 }
-table button:hover {
-  background-color: darkred;
-  
+table thead tr{ background:#f8fafc; }
+table tbody tr:nth-child(even){ background:#f9fafb; }
+table tbody tr:hover{ background:#f1f5f9; }
+
+table button{
+  background:var(--brand); color:#fff; border:none; padding:6px 10px;
+  border-radius:10px; cursor:pointer; font-weight:700; transition:opacity .2s, transform .06s;
 }
+table button:hover{ background:var(--brand-2); }
+table button:active{ transform:translateY(1px) }
+
+h2{ color:var(--ink); font-weight:800; margin:0 0 6px }

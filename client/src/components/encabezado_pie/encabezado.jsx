@@ -109,25 +109,6 @@ const Encabezado = () => {
               </>
             )}
           </Nav>
-
-          {/* 🎨 Selector de color */}
-          <Dropdown className="ms-3">
-            <Dropdown.Toggle variant="outline-light">
-              <FaPalette /> {/* Ícono paleta */}
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-              <Dropdown.Item onClick={() => setColorTema("rgb(51,72,92)")}>
-                🔵 Azul
-              </Dropdown.Item>
-              <Dropdown.Item onClick={() => setColorTema("#000000")}>
-                ⚫ Negro
-              </Dropdown.Item>
-              <Dropdown.Item onClick={() => setColorTema("#00BFFF")}>
-                🔵 Celeste
-              </Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-          
           <Nav className="ms-3">
             <Dropdown align="end">
               <Dropdown.Toggle variant="outline-light" id="dropdown-basic">

@@ -1,150 +1,118 @@
-body { font-family: Arial, sans-serif; margin:0; padding:0; }
-header { background:#8B0000; color:#fff; padding:1rem; }
-nav a { color:#fff; margin-right:1rem; text-decoration:none; }
-main { padding:1rem; }
-form { display:flex; flex-direction:column; max-width:300px; }
-form label { margin-top:0.5rem; }
-form input, form button { padding:0.5rem; margin-top:0.2rem; }
-button { background:#8B0000; color:#fff; border:none; cursor:pointer; }
-button:hover { background:#6B0000; }
-footer { text-align:center; padding:1rem; background:#f0f0f0; margin-top:2rem; }
-/* Dropdown */
-.dropdown {
-  position: relative;
-}
-.dropbtn {
-  background: transparent;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  padding: 6px 10px;
-}
-.dropdown-content {
-  display: none;
-  position: absolute;
-  top: 30px;
-  right: 0;
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  overflow: hidden;
-  z-index: 10;
-}
-.dropdown-content a {
-  display: block;
-  padding: 8px 12px;
-  color: #333;
-  text-decoration: none;
-  white-space: nowrap;
-}
-.dropdown-content a:hover {
-  background: #f2f2f2;
-}
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-/* Estilos generales para todas las tablas */
-.tabla-factura, 
-.tabla-productos {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 1rem 0;
-    font-size: 0.9rem;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-    border-radius: 8px;
-    overflow: hidden;
+:root{
+  --brand:#8B0000;
+  --brand-2:#6B0000;
 }
 
-/* Cabeceras de tabla */
-.tabla-factura thead tr,
-.tabla-productos thead tr {
-    background-color: #6c757d; /* Gris oscuro que combina con tu header */
-    color: white;
-    text-align: left;
+:where(body){
+  font-family: Arial, sans-serif;
+  margin:0;
+  padding:0;
 }
 
-.tabla-factura th,
-.tabla-productos th {
-    padding: 12px 15px;
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.8rem;
-    letter-spacing: 0.5px;
+:where(main){ padding:1rem; }
+:where(footer){
+  text-align:center;
+  padding:1rem;
+  background:#f0f0f0;
+  margin-top:2rem;
 }
 
-/* Celdas del cuerpo */
-.tabla-factura td,
-.tabla-productos td {
-    padding: 12px 15px;
-    border-bottom: 1px solid #e0e0e0;
-    vertical-align: middle;
+:where(button){
+  background:var(--brand);
+  color:#fff;
+  border:none;
+  cursor:pointer;
+}
+:where(button:hover){ background:var(--brand-2); }
+
+:where(header){ background:var(--brand); color:#fff; padding:1rem; }
+:where(nav) a{
+  color:#fff;
+  margin-right:1rem;
+  text-decoration:none;
 }
 
-/* Filas alternas para mejor legibilidad */
-.tabla-factura tbody tr:nth-child(even),
-.tabla-productos tbody tr:nth-child(even) {
-    background-color: #f8f9fa; /* Gris muy claro */
+:where(.dropdown){ position:relative; }
+:where(.dropbtn){
+  background:transparent;
+  border:none;
+  color:#fff;
+  cursor:pointer;
+  padding:6px 10px;
+}
+:where(.dropdown-content){
+  display:none;
+  position:absolute;
+  top:30px; right:0;
+  background:#fff; border:1px solid #ccc; border-radius:4px;
+  overflow:hidden; z-index:10;
+}
+:where(.dropdown-content a){
+  display:block; padding:8px 12px; color:#333; text-decoration:none; white-space:nowrap;
+}
+:where(.dropdown-content a:hover){ background:#f2f2f2; }
+.dropdown:hover .dropdown-content{ display:block; }
+
+:where(.tabla-factura, .tabla-productos){
+  width:100%;
+  border-collapse:collapse;
+  margin:1rem 0;
+  font-size:0.9rem;
+  box-shadow:0 0 10px rgba(0,0,0,0.05);
+  border-radius:8px;
+  overflow:hidden;
+  background:#fff;
+}
+:where(.tabla-factura thead tr, .tabla-productos thead tr){
+  background-color:#6c757d;
+  color:#fff;
+  text-align:left;
+}
+:where(.tabla-factura th, .tabla-productos th){
+  padding:12px 15px;
+  font-weight:600;
+  text-transform:uppercase;
+  font-size:0.8rem;
+  letter-spacing:0.5px;
+}
+:where(.tabla-factura td, .tabla-productos td){
+  padding:12px 15px;
+  border-bottom:1px solid #e0e0e0;
+  vertical-align:middle;
+}
+:where(.tabla-factura tbody tr:nth-child(even),
+       .tabla-productos tbody tr:nth-child(even)){
+  background-color:#f8f9fa;
+}
+:where(.tabla-factura tbody tr:hover,
+       .tabla-productos tbody tr:hover){
+  background-color:#f1f1f1;
+}
+:where(.tabla-factura tfoot tr, .tabla-productos tfoot tr){
+  background-color:#f8f9fa;
+  font-weight:bold;
+}
+:where(.tabla-factura tfoot tr.total, .tabla-productos tfoot tr.total){
+  background-color:#e9ecef;
+  color:#212529;
+  font-size:1rem;
+}
+:where(.tabla-factura .btn, .tabla-productos .btn){
+  padding:5px 10px; font-size:0.8rem; margin:2px;
+}
+:where(.tabla-factura input[type="number"]){
+  width:70px; display:inline-block; margin-right:5px;
+}
+:where(.contenedor-detalle-venta .tabla-productos){
+  margin-top:1.5rem; margin-bottom:2rem;
 }
 
-/* Efecto hover para filas */
-.tabla-factura tbody tr:hover,
-.tabla-productos tbody tr:hover {
-    background-color: #f1f1f1;
-}
-
-/* Pie de tabla */
-.tabla-factura tfoot tr,
-.tabla-productos tfoot tr {
-    background-color: #f8f9fa;
-    font-weight: bold;
-}
-
-/* Fila de total especial */
-.tabla-factura tfoot tr.total,
-.tabla-productos tfoot tr.total {
-    background-color: #e9ecef;
-    color: #212529;
-    font-size: 1rem;
-}
-
-/* Botones dentro de tablas */
-.tabla-factura .btn,
-.tabla-productos .btn {
-    padding: 5px 10px;
-    font-size: 0.8rem;
-    margin: 2px;
-}
-
-/* Ajustes específicos para tabla de carrito */
-.tabla-factura input[type="number"] {
-    width: 70px;
-    display: inline-block;
-    margin-right: 5px;
-}
-
-/* Ajustes para tabla de resumen de pedido */
-.tabla-productos {
-    background-color: white;
-}
-
-/* Estilos para la tabla en el detalle de venta */
-.contenedor-detalle-venta .tabla-productos {
-    margin-top: 1.5rem;
-    margin-bottom: 2rem;
-}
-
-/* Estilos responsivos */
-@media (max-width: 768px) {
-    .tabla-factura, 
-    .tabla-productos {
-        display: block;
-        overflow-x: auto;
-    }
-    
-    .tabla-factura th,
-    .tabla-productos th,
-    .tabla-factura td,
-    .tabla-productos td {
-        padding: 8px 10px;
-    }
+@media (max-width: 768px){
+  :where(.tabla-factura, .tabla-productos){
+    display:block; overflow-x:auto;
+  }
+  :where(.tabla-factura th, .tabla-productos th,
+         .tabla-factura td, .tabla-productos td){
+    padding:8px 10px;
+  }
 }

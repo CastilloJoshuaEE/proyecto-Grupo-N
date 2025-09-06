@@ -1,0 +1,98 @@
+/* Estilos específicos para el componente de accesibilidad */
+.accesibilidad-container {
+  /* Asegurar que los estilos de accesibilidad no se apliquen a este componente */
+  font-size: 16px !important;
+  letter-spacing: normal !important;
+  line-height: 1.5 !important;
+}
+
+.accesibilidad-container * {
+  font-size: inherit !important;
+  letter-spacing: inherit !important;
+  line-height: inherit !important;
+}
+
+.accesibilidad-toggle {
+  border-radius: 50% !important;
+  width: 60px !important;
+  height: 60px !important;
+  background-color: #8B0000 !important;
+  border-color: #8B0000 !important;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2) !important;
+  font-size: 16px !important;
+}
+
+.accesibilidad-toggle:hover,
+.accesibilidad-toggle:focus {
+  background-color: #6B0000 !important;
+  border-color: #6B0000 !important;
+}
+
+.accesibilidad-menu {
+  min-width: 300px !important;
+  padding: 15px !important;
+  border-radius: 10px !important;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15) !important;
+  border: 2px solid #8B0000 !important;
+  font-size: 14px !important;
+}
+
+.accesibilidad-title {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  margin-bottom: 8px !important;
+}
+
+.accesibilidad-value {
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  min-width: 40px !important;
+  text-align: center !important;
+}
+
+.accesibilidad-btn {
+  font-size: 14px !important;
+  width: 32px !important;
+  height: 32px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+}
+
+.accesibilidad-divider {
+  margin: 15px 0 !important;
+}
+
+.accesibilidad-reset {
+  font-size: 14px !important;
+  padding: 8px 16px !important;
+}
+
+/* Estilos para la accesibilidad aplicada al resto de la aplicación */
+body.accesibilidad-activa {
+  font-size: var(--tamano-texto, 100%) !important;
+  letter-spacing: var(--espaciado-texto, normal) !important;
+  line-height: var(--altura-linea, 1.5) !important;
+}
+
+/* Selectores específicos para aplicar estilos de accesibilidad */
+body.accesibilidad-activa p:not(.accesibilidad-container p),
+body.accesibilidad-activa span:not(.accesibilidad-container span),
+body.accesibilidad-activa div:not(.accesibilidad-container):not(.accesibilidad-container *),
+body.accesibilidad-activa h1:not(.accesibilidad-container h1),
+body.accesibilidad-activa h2:not(.accesibilidad-container h2),
+body.accesibilidad-activa h3:not(.accesibilidad-container h3),
+body.accesibilidad-activa h4:not(.accesibilidad-container h4),
+body.accesibilidad-activa h5:not(.accesibilidad-container h5),
+body.accesibilidad-activa h6:not(.accesibilidad-container h6),
+body.accesibilidad-activa a:not(.accesibilidad-container a),
+body.accesibilidad-activa li:not(.accesibilidad-container li),
+body.accesibilidad-activa td:not(.accesibilidad-container td),
+body.accesibilidad-activa th:not(.accesibilidad-container th),
+body.accesibilidad-activa .btn:not(.accesibilidad-container .btn),
+body.accesibilidad-activa .form-control:not(.accesibilidad-container .form-control) {
+  font-size: var(--tamano-texto, 100%) !important;
+  letter-spacing: calc((var(--espaciado-texto) - 100) / 100 * 0.1em) !important;
+  line-height: var(--altura-linea, 1.5) !important;
+}
