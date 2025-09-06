@@ -75,7 +75,7 @@ const Encabezado = () => {
           <Form className="d-flex mx-auto my-2 my-lg-0" onSubmit={handleBuscar}>
             <Form.Control
               type="search"
-              placeholder="Buscar gorras por nombre o descripción..."
+              placeholder="Buscar gorras por nombre..."
               className="me-2"
               value={busqueda}
               onChange={handleInputChange}
