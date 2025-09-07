@@ -1,11 +1,12 @@
-:root{
-  --brand:#8B0000;
-  --brand-2:#6B0000;
-  --gold:#FFD700;
-  --success:#16a34a;
-  --danger:#dc2626;
-  --warning:#eab308;
-  --info:#0ea5e9;
+:root {
+  --brand: rgb(51,72,92);
+  --brand-dark: rgb(41,58,74);
+  --brand-2: #6B0000;
+  --gold: #FFD700;
+  --success: #16a34a;
+  --danger: #dc2626;
+  --warning: #eab308;
+  --info: #0ea5e9;
 }
 
 * {
@@ -89,4 +90,51 @@ img {
   :where(footer){
     padding:1rem 0.5rem;
   }
+}
+/* Estilos para los enlaces de navegación */
+/* Estilos para los enlaces de navegación - Mayor especificidad */
+nav.navbar .nav-link.custom-nav-link {
+  color: rgba(255, 255, 255, 0.85) !important;
+  transition: all 0.3s ease;
+  padding: 0.5rem 1rem !important;
+  border-radius: 0.25rem;
+}
+
+nav.navbar .nav-link.custom-nav-link:hover,
+nav.navbar .nav-link.custom-nav-link:focus {
+  color: white !important;
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  text-decoration: none !important;
+}
+
+nav.navbar .nav-link.custom-nav-link:active,
+nav.navbar .nav-link.custom-nav-link.active {
+  color: white !important;
+  background-color: rgba(255, 255, 255, 0.25) !important;
+  font-weight: 600;
+}
+
+/* Estilos para el estado activo cuando se hace clic */
+nav.navbar .nav-link.custom-nav-link:focus:not(:active) {
+  color: white !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Estilos para el dropdown del encabezado */
+.dropdown-item-custom {
+  color: white !important;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-item-custom:hover,
+.dropdown-item-custom:focus {
+  background-color: var(--brand) !important;
+  color: white !important;
+}
+
+/* Asegurar que el texto del dropdown sea visible al hacer hover */
+.dropdown-menu-dark .dropdown-item:hover,
+.dropdown-menu-dark .dropdown-item:focus {
+  background-color: var(--brand);
+  color: white;
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Form, Button, Alert, Card } from 'react-bootstrap';
+import { Container, Form, Button, Alert, Card, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext';
 import { toast } from 'react-hot-toast';
@@ -101,9 +101,9 @@ const EditarPerfil = () => {
 
   if (cargando) {
     return (
-      <Container className="my-5">
+      <Container className="login-container d-flex align-items-center justify-content-center py-5">
         <div className="text-center">
-          <div className="spinner-border" role="status">
+          <div className="spinner-border text-primary" role="status">
             <span className="visually-hidden">Cargando...</span>
           </div>
         </div>
@@ -112,79 +112,102 @@ const EditarPerfil = () => {
   }
 
   return (
-    <Container className="my-5">
-      <div className="row justify-content-center">
-        <div className="col-md-8">
-          <Card>
-            <Card.Header>
-              <h3 className="text-center mb-0">Editar Perfil</h3>
+    <Container className="login-container d-flex align-items-center justify-content-center py-5">
+      <Row className="justify-content-center w-100">
+        <Col md={8} lg={6} xl={5}>
+          <Card className="login-card shadow border-0">
+            <Card.Header className="bg-dark text-white text-center py-4">
+              <h2 className="mb-0 fw-bold">Editar Perfil</h2>
             </Card.Header>
-            <Card.Body>
-              {error && <Alert variant="danger">{error}</Alert>}
+            
+            <Card.Body className="p-5">
+              {error && <Alert variant="danger" className="mb-4">{error}</Alert>}
               
-              <Form onSubmit={handleSubmit}>
-                <div className="row">
-                  <div className="col-md-6">
-                    <Form.Group className="mb-3">
-                      <Form.Label>Nombre</Form.Label>
+              <Form onSubmit={handleSubmit} className="login-form">
+                <Row>
+                  <Col md={6}>
+                    <Form.Group className="mb-4">
+                      <Form.Label className="fw-semibold text-dark mb-2">
+                        Nombre:
+                      </Form.Label>
                       <Form.Control
                         type="text"
                         name="nombre"
                         value={formData.nombre}
                         onChange={handleChange}
                         required
+                        className="py-3 px-4 border-2"
+                        placeholder="Ingrese su nombre"
                       />
                     </Form.Group>
-                  </div>
-                  <div className="col-md-6">
-                    <Form.Group className="mb-3">
-                      <Form.Label>Apellido</Form.Label>
+                  </Col>
+                  <Col md={6}>
+                    <Form.Group className="mb-4">
+                      <Form.Label className="fw-semibold text-dark mb-2">
+                        Apellido:
+                      </Form.Label>
                       <Form.Control
                         type="text"
                         name="apellido"
                         value={formData.apellido}
                         onChange={handleChange}
                         required
+                        className="py-3 px-4 border-2"
+                        placeholder="Ingrese su apellido"
                       />
                     </Form.Group>
-                  </div>
-                </div>
+                  </Col>
+                </Row>
 
-                <Form.Group className="mb-3">
-                  <Form.Label>Correo electrónico</Form.Label>
+                <Form.Group className="mb-4">
+                  <Form.Label className="fw-semibold text-dark mb-2">
+                    Correo electrónico:
+                  </Form.Label>
                   <Form.Control
                     type="email"
                     name="correo"
                     value={formData.correo}
                     onChange={handleChange}
                     required
+                    className="py-3 px-4 border-2"
+                    placeholder="ejemplo@correo.com"
                   />
                 </Form.Group>
 
-                <Form.Group className="mb-3">
-                  <Form.Label>Cédula</Form.Label>
+                <Form.Group className="mb-4">
+                  <Form.Label className="fw-semibold text-dark mb-2">
+                    Cédula:
+                  </Form.Label>
                   <Form.Control
                     type="text"
                     name="cedula"
                     value={formData.cedula}
                     onChange={handleChange}
                     required
+                    className="py-3 px-4 border-2"
+                    placeholder="Ingrese su cédula"
                   />
                 </Form.Group>
 
-                <Form.Group className="mb-3">
-                  <Form.Label>Dirección</Form.Label>
+                <Form.Group className="mb-4">
+                  <Form.Label className="fw-semibold text-dark mb-2">
+                    Dirección:
+                  </Form.Label>
                   <Form.Control
                     type="text"
                     name="direccion"
                     value={formData.direccion}
                     onChange={handleChange}
                     required
+                    className="py-3 px-4 border-2"
+                    placeholder="Ingrese su dirección"
                   />
                 </Form.Group>
 
                 <Form.Group className="mb-4">
-                  <Form.Label>Teléfono</Form.Label>
+                  <Form.Label className="fw-semibold text-dark mb-2">
+                    Teléfono:
+                  </Form.Label>
                   <Form.Control
                     type="tel"
                     name="telefono"
@@ -192,19 +215,25 @@ const EditarPerfil = () => {
                     onChange={handleChange}
                     pattern="[0-9]{7,15}"
                     required
+                    className="py-3 px-4 border-2"
+                    placeholder="Ingrese su teléfono"
                   />
                 </Form.Group>
 
                 <div className="d-grid gap-2 d-md-flex">
                   <Button 
                     type="submit" 
-                    variant="primary" 
+                    variant="dark" 
+                    size="lg"
+                    className="fw-bold py-3 flex-fill"
                     disabled={guardando}
                   >
                     {guardando ? 'Guardando...' : 'Guardar Cambios'}
                   </Button>
                   <Button 
-                    variant="secondary" 
+                    variant="outline-secondary" 
+                    size="lg"
+                    className="fw-bold py-3 flex-fill"
                     onClick={() => navigate('/perfil')}
                   >
                     Cancelar
@@ -213,8 +242,8 @@ const EditarPerfil = () => {
               </Form>
             </Card.Body>
           </Card>
-        </div>
-      </div>
+        </Col>
+      </Row>
     </Container>
   );
 };

@@ -43,8 +43,8 @@ const datosIniciales = async () => {
         {
           correo: 'figueroa@hotmail.com',
           contrasena: await bcrypt.hash('cliente123', 12),
-          nombre: 'Figueroa',
-          apellido: 'Melissa',
+          nombre: 'Melissa',
+          apellido: 'Figueroa',
           cedula: '0977777777',
           telefono: '0903800026',
           direccion: 'Cooperativa',

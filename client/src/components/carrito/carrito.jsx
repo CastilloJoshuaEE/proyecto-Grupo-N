@@ -121,6 +121,7 @@ const Carrito = () => {
                       <td data-label="Total">${(item.precio_unitario * item.cantidad).toFixed(2)}</td>
                       <td data-label="Acciones">
                         <div className="d-flex gap-2">
+                          {/* 
                           <Button
                             variant="outline-primary"
                             size="sm"
@@ -132,6 +133,7 @@ const Carrito = () => {
                           >
                             Actualizar
                           </Button>
+                          */}
                           <Button
                             variant="outline-danger"
                             size="sm"

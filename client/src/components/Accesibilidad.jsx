@@ -10,58 +10,36 @@ const Accesibilidad = () => {
   const [espaciadoTexto, setEspaciadoTexto] = useState(100);
   const [alturaLinea, setAlturaLinea] = useState(150);
   const [grayscale, setGrayscale] = useState(false); // 🌑 estado para tonos grises
-  const { setColorTema } = useTheme(); 
+  const { colorTema, setColorTema } = useTheme();  
   // Aplicar estilos excluyendo el componente de accesibilidad
   const aplicarEstilos = () => {
     const root = document.documentElement;
     root.style.setProperty('--tamano-texto', `${tamanoTexto}%`);
     root.style.setProperty('--espaciado-texto', `${espaciadoTexto}%`);
     root.style.setProperty('--altura-linea', `${alturaLinea}%`);
-     // Aplicar o quitar filtro de grises
+    
     // Aplicar o quitar filtro de grises excluyendo modales
     if (grayscale) {
-      // Crear un contenedor para todo el contenido excepto modales
       const mainContent = document.querySelector('main, header, footer');
       if (mainContent) {
         mainContent.style.filter = 'grayscale(100%)';
       }
       
-      // Asegurarse de que los modales no tengan filtro
       const modals = document.querySelectorAll('.modal, .modal-content, .modal-backdrop');
       modals.forEach(modal => {
         modal.style.filter = 'none';
       });
     } else {
-      // Quitar filtro de grises
       const mainContent = document.querySelector('main, header, footer');
       if (mainContent) {
         mainContent.style.filter = '';
       }
     }
 
-
     // Aplicar estilos a todos los elementos de texto EXCLUYENDO el componente de accesibilidad
-    const elementosTexto = document.querySelectorAll(`
-      body, 
-      p, 
-      span, 
-      div:not(.accesibilidad-container):not(.accesibilidad-container *), 
-      h1, 
-      h2, 
-      h3, 
-      h4, 
-      h5, 
-      h6, 
-      a, 
-      li, 
-      td, 
-      th,
-      .btn:not(.accesibilidad-container .btn),
-      .form-control:not(.accesibilidad-container .form-control)
-    `);
+    const elementosTexto = document.querySelectorAll(`body, p, span, div:not(.accesibilidad-container):not(.accesibilidad-container *), h1, h2, h3, h4, h5, h6, a, li, td, th, .btn:not(.accesibilidad-container .btn), .form-control:not(.accesibilidad-container .form-control)`);
     
     elementosTexto.forEach(el => {
-      // Solo aplicar si no está dentro del contenedor de accesibilidad
       if (!el.closest('.accesibilidad-container')) {
         el.style.fontSize = `${tamanoTexto}%`;
         el.style.letterSpacing = `${(espaciadoTexto - 100) / 100}em`;
@@ -87,24 +65,8 @@ const Accesibilidad = () => {
       if (mainContent) {
         mainContent.style.filter = '';
       }
-      const elementosTexto = document.querySelectorAll(`
-        body, 
-        p, 
-        span, 
-        div:not(.accesibilidad-container):not(.accesibilidad-container *), 
-        h1, 
-        h2, 
-        h3, 
-        h4, 
-        h5, 
-        h6, 
-        a, 
-        li, 
-        td, 
-        th,
-        .btn:not(.accesibilidad-container .btn),
-        .form-control:not(.accesibilidad-container .form-control)
-      `);
+      
+      const elementosTexto = document.querySelectorAll(`body, p, span, div:not(.accesibilidad-container):not(.accesibilidad-container *), h1, h2, h3, h4, h5, h6, a, li, td, th, .btn:not(.accesibilidad-container .btn), .form-control:not(.accesibilidad-container .form-control)`);
       
       elementosTexto.forEach(el => {
         if (!el.closest('.accesibilidad-container')) {
@@ -120,7 +82,6 @@ const Accesibilidad = () => {
   useEffect(() => {
     aplicarEstilos();
   }, [tamanoTexto, espaciadoTexto, alturaLinea, grayscale]);
-
   const aumentarTamanoTexto = () => {
     setTamanoTexto(prev => Math.min(prev + 10, 150));
   };
@@ -148,18 +109,11 @@ const Accesibilidad = () => {
   return (
     <div className="accesibilidad-container" style={{ position: 'fixed', bottom: '20px', right: '20px', zIndex: 1000 }}>
       <Dropdown>
-        <Dropdown.Toggle 
-          variant="primary" 
-          id="dropdown-accesibilidad"
-          className="d-flex align-items-center accesibilidad-toggle"
-        >
+        <Dropdown.Toggle variant="primary" id="dropdown-accesibilidad" className="d-flex align-items-center accesibilidad-toggle">
           <FaUniversalAccess size={24} />
         </Dropdown.Toggle>
 
-        <Dropdown.Menu 
-          align="end"
-          className="accesibilidad-menu"
-        >
+        <Dropdown.Menu align="end" className="accesibilidad-menu">
           <div className="mb-3">
             <h6 className="d-flex align-items-center accesibilidad-title">
               <FaFont className="me-2" />
@@ -245,37 +199,41 @@ const Accesibilidad = () => {
           </div>
 
         {/* 🎨 Selector de color */}
-        <div className="mb-3">
-        <h6 className="d-flex align-items-center accesibilidad-title">
-            <FaPalette className="me-2 text-primary" size={18} />
-            Colores del tema
-        </h6>
-        <div className="d-flex gap-2">
-            <Button 
-            variant="outline-secondary" 
-            size="sm" 
-            onClick={() => setColorTema("rgb(51,72,92)")}
-            >
-            🔵 Azul
-            </Button>
-            <Button 
-            variant="outline-dark" 
-            size="sm" 
-            onClick={() => setColorTema("#000000")}
-            >
-            ⚫ Negro
-            </Button>
-            <Button 
-            variant="outline-info" 
-            size="sm" 
-            onClick={() => setColorTema("#00BFFF")}
-            >
-            🔵 Celeste
-            </Button>
-        </div>
-        </div>
-        {/* 🌑 Tonos grises */}
-        <div className="mb-3">
+          <div className="mb-3">
+            <h6 className="d-flex align-items-center accesibilidad-title">
+              <FaPalette className="me-2 text-primary" size={18} />
+              Colores del tema
+            </h6>
+            <div className="d-flex gap-2 flex-wrap">
+              <Button 
+                variant="outline-primary" 
+                size="sm" 
+                onClick={() => setColorTema("rgb(51,72,92)")}
+                className={colorTema === "rgb(51,72,92)" ? "active" : ""}
+              >
+                🔵 Azul
+              </Button>
+              <Button 
+                variant="outline-dark" 
+                size="sm" 
+                onClick={() => setColorTema("#000000")}
+                className={colorTema === "#000000" ? "active" : ""}
+              >
+                ⚫ Negro
+              </Button>
+              <Button 
+                variant="outline-info" 
+                size="sm" 
+                onClick={() => setColorTema("#00BFFF")}
+                className={colorTema === "#00BFFF" ? "active" : ""}
+              >
+                🔵 Celeste
+              </Button>
+            </div>
+          </div>
+          
+          {/* 🌑 Tonos grises */}
+          <div className="mb-3">
             <h6 className="d-flex align-items-center accesibilidad-title">
               🌑 Filtros visuales
             </h6>
@@ -286,8 +244,7 @@ const Accesibilidad = () => {
             >
               {grayscale ? "Desactivar grises" : "Aplicar grises"}
             </Button>
-        </div>
-          
+          </div>
 
           <hr className="accesibilidad-divider" />
 

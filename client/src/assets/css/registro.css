@@ -196,3 +196,37 @@
 .nav-link:hover {
   color: var(--brand) !important;
 }
+/* Estilos para campos de solo lectura */
+.form-control[readonly] {
+  background-color: #f8f9fa !important;
+  border-color: #dee2e6;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+/* Ajustes para cards de perfil */
+.login-card .card-body {
+  padding: 2rem;
+}
+
+/* Ajustes responsivos para perfil */
+@media (max-width: 768px) {
+  .login-card .card-body {
+    padding: 1.5rem;
+  }
+}
+
+/* Espaciado para botones en grid */
+.d-grid .btn {
+  margin-bottom: 0.5rem;
+}
+
+/* Estilos para títulos */
+.fw-bold.text-dark {
+  color: var(--dark) !important;
+}
+
+/* Estilos para cards en perfil */
+.login-card {
+  margin-bottom: 1.5rem;
+}

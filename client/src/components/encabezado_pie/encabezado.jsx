@@ -54,7 +54,7 @@ const Encabezado = () => {
   const totalItems = carrito.items.reduce((total, item) => total + item.cantidad, 0);
 
   return (
-    <Navbar expand="lg" style={{ backgroundColor: colorTema }} variant="dark" className="custom-header">
+    <Navbar expand="lg" style={{ backgroundColor: 'var(--brand)' }} variant="dark" className="custom-header">
       <Container>
         <Navbar.Brand as={Link} to="/">
           <img
@@ -88,23 +88,65 @@ const Encabezado = () => {
           </Form>
           
           <Nav className="ms-auto">
-            <Nav.Link as={Link} to="/">Inicio</Nav.Link>
-            <Nav.Link as={Link} to="/catalogo">Catálogo</Nav.Link>
-            <Nav.Link as={Link} to="/acerca">Sobre nosotros</Nav.Link>
+            <Nav.Link 
+              as={Link} 
+              to="/"
+              className="custom-nav-link"
+            >
+              Inicio
+            </Nav.Link>
+            <Nav.Link 
+              as={Link} 
+              to="/catalogo"
+              className="custom-nav-link"
+            >
+              Catálogo
+            </Nav.Link>
+            <Nav.Link 
+              as={Link} 
+              to="/acerca"
+              className="custom-nav-link"
+            >
+              Sobre nosotros
+            </Nav.Link>
             
             {usuario && (
               <>
                 {usuario.tipo === 'admin' && (
                   <>
-                    <Nav.Link as={Link} to="/admin/dashboard">Panel administrativo</Nav.Link>
-                    <Nav.Link as={Link} to="/admin/gorras">Gestión de gorras</Nav.Link>
+                    <Nav.Link 
+                      as={Link} 
+                      to="/admin/dashboard"
+                      className="custom-nav-link"
+                    >
+                      Panel administrativo
+                    </Nav.Link>
+                    <Nav.Link 
+                      as={Link} 
+                      to="/admin/gorras"
+                      className="custom-nav-link"
+                    >
+                      Gestión de gorras
+                    </Nav.Link>
                   </>
                 )}
                 {usuario.tipo === 'cliente' && (
-                  <Nav.Link as={Link} to="/historial-pedidos">Historial de pedidos</Nav.Link>
+                  <Nav.Link 
+                    as={Link} 
+                    to="/historial-pedidos"
+                    className="custom-nav-link"
+                  >
+                    Historial de pedidos
+                  </Nav.Link>
                 )}
                 {usuario.tipo === 'bodeguero' && (
-                  <Nav.Link as={Link} to="/admin/gorras">Gestión de gorras</Nav.Link>
+                  <Nav.Link 
+                    as={Link} 
+                    to="/admin/gorras"
+                    className="custom-nav-link"
+                  >
+                    Gestión de gorras
+                  </Nav.Link>
                 )}
               </>
             )}
@@ -115,17 +157,44 @@ const Encabezado = () => {
                 {usuario ? usuario.nombre : 'Mi cuenta'}
               </Dropdown.Toggle>
 
-              <Dropdown.Menu>
+              <Dropdown.Menu style={{ backgroundColor: 'var(--brand-dark)' }}>
                 {!usuario ? (
                   <>
-                    <Dropdown.Item as={Link} to="/login">Ingresar</Dropdown.Item>
-                    <Dropdown.Item as={Link} to="/registro">Registrarse</Dropdown.Item>
+                    <Dropdown.Item 
+                      as={Link} 
+                      to="/login"
+                      style={{ color: 'white' }}
+                      className="dropdown-item-custom"
+                    >
+                      Ingresar
+                    </Dropdown.Item>
+                    <Dropdown.Item 
+                      as={Link} 
+                      to="/registro"
+                      style={{ color: 'white' }}
+                      className="dropdown-item-custom"
+                    >
+                      Registrarse
+                    </Dropdown.Item>
                   </>
                 ) : (
                   <>
-                    <Dropdown.Item as={Link} to="/perfil">👤 Mi perfil</Dropdown.Item>
+                    <Dropdown.Item 
+                      as={Link} 
+                      to="/perfil"
+                      style={{ color: 'white' }}
+                      className="dropdown-item-custom"
+                    >
+                      👤 Mi perfil
+                    </Dropdown.Item>
                     <Dropdown.Divider />
-                    <Dropdown.Item onClick={handleLogout}>🔓 Cerrar sesión</Dropdown.Item>
+                    <Dropdown.Item 
+                      onClick={handleLogout}
+                      style={{ color: 'white' }}
+                      className="dropdown-item-custom"
+                    >
+                      🔓 Cerrar sesión
+                    </Dropdown.Item>
                   </>
                 )}
               </Dropdown.Menu>

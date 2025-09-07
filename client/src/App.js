@@ -1,4 +1,5 @@
 import React from 'react';
+import { ThemeProvider } from './components/context/ThemeContext';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import Accesibilidad from './components/Accesibilidad'; // Importa el nuevo componente
@@ -40,6 +41,7 @@ import './App.css';
 
 function App() {
   return (
+    <ThemeProvider>
     <AuthProvider>
       <CarritoProvider>
         <Router>
@@ -84,6 +86,7 @@ function App() {
         </Router>
       </CarritoProvider>
     </AuthProvider>
+     </ThemeProvider>
   );
 }
 
