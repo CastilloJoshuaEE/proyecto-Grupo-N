@@ -54,7 +54,7 @@ exports.obtenerHistorialCompras = async (req, res) => {
 exports.obtenerDetalleCompra = async (req, res) => {
   try {
     const venta = await Venta.findById(req.params.id)
-      .populate('id_usuario', 'nombre apellido cedula correo');
+      .populate('id_usuario', 'nombre apellido cedula correo telefono direccion ciudad pais');
     
     if (!venta) {
       return res.status(404).json({

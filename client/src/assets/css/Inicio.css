@@ -1,0 +1,143 @@
+.hero-urban {
+  border-left: 6px solid #e74c3c;
+  color: white;
+  position: relative;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding: 80px 20px;
+  background: linear-gradient(135deg, var(--brand) 0%, var(--brand-2) 100%);
+}
+
+.urban-badge {
+  background: #e74c3c;
+  color: white;
+  padding: 10px 24px;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.urban-title {
+  font-size: 3.5rem;
+  font-weight: 900;
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+  margin-bottom: 20px;
+}
+
+.text-highlight {
+  color: var(--gold);
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.urban-subtitle {
+  font-size: 1.3rem;
+  color: rgba(255,255,255,0.9);
+  font-weight: 300;
+  margin-bottom: 40px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.urban-subtitle strong {
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.urban-btn {
+  background: var(--gold) !important;
+  border: none !important;
+  padding: 16px 48px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  color: var(--brand) !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.urban-btn:hover {
+  background: #e6b800 !important;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(231, 76, 60, 0.4);
+}
+
+/* Featured products section */
+.featured-products {
+  padding: 80px 0;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 40px;
+  color: var(--brand);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .urban-title {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-urban {
+    padding: 60px 20px;
+    text-align: center;
+  }
+  
+  .urban-title {
+    font-size: 2.5rem;
+    letter-spacing: -1px;
+  }
+  
+  .urban-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .urban-btn {
+    padding: 14px 36px;
+    font-size: 1rem;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-urban {
+    padding: 40px 15px;
+  }
+  
+  .urban-title {
+    font-size: 2rem;
+  }
+  
+  .urban-badge {
+    font-size: 0.8rem;
+    padding: 8px 20px;
+  }
+  
+  .urban-subtitle {
+    font-size: 1rem;
+  }
+  
+  .urban-btn {
+    padding: 12px 30px;
+    font-size: 0.9rem;
+  }
+  
+  .section-title {
+    font-size: 1.8rem;
+  }
+}

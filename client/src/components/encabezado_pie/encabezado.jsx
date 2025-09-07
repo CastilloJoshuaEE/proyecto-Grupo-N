@@ -59,7 +59,7 @@ const Encabezado = () => {
         <Navbar.Brand as={Link} to="/">
           <img
             src="/img/logo.png"
-            alt="Gorras Premium"
+            alt="kawsaycaps"
             height="50"
             className="d-inline-block align-top"
             onError={(e) => {

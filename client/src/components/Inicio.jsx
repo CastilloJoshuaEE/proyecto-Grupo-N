@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../components/auth/AuthContext';
 import { useCarrito } from '../components/context/CarritoContext';
 import { toast } from 'react-hot-toast';
-import './Inicio.css';
+import '../assets/css/Inicio.css';
 import { useTheme } from './context/ThemeContext';
 const Inicio = () => {
     const { colorTema } = useTheme(); // usa el contexto

@@ -3,6 +3,7 @@ import { Container, Row, Col, Card, Form, Button, Alert } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext';
 import { toast } from 'react-hot-toast';
+import '../../assets/css/registro.css';
 
 const Perfil = () => {
   const [usuario, setUsuario] = useState({

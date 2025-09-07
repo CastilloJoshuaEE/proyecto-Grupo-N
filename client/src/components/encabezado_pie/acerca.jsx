@@ -7,7 +7,7 @@ const Acerca = () => {
       <Card className="bg-light p-5 rounded">
         <Card.Body className="text-center">
           <h2 className="text-center mb-4">Sobre nosotros</h2>
-          <p className="text-center lead">Conoce al equipo detrás de Gorras Premium</p>
+          <p className="text-center lead">Conoce al equipo detrás de Kawsay Caps S.A.</p>
 
           <h3 className="mt-4">Integrantes:</h3>
           <ListGroup variant="flush" className="mb-4">
@@ -25,25 +25,27 @@ const Acerca = () => {
             </div>
             <div className="col-md-6 mb-3">
               <h3>Período:</h3>
-              <p className="fs-5">2026</p>
+              <p className="fs-5">2025</p>
             </div>
           </div>
 
           <div className="mt-4">
             <h3>Misión</h3>
             <p>
-              Proveer gorras de la más alta calidad con diseños innovadores que 
-              satisfagan las necesidades y gustos de nuestros clientes, 
-              manteniendo siempre los mejores estándares de servicio.
+              Inspirar orgullo y amor por nuestra cultura ecuatoriana a través de gorras urbanas de alta calidad, con diseños innovadores 
+              y eslóganes que transmitan identidad, emoción y pertenencia. Nos comprometemos a ofrecer un producto que conecte con las raíces, 
+              acompañe el estilo de vida de nuestra gente y sea un símbolo de unidad y autenticidad.
             </p>
           </div>
 
           <div className="mt-4">
             <h3>Visión</h3>
             <p>
-              Ser la empresa líder en venta de gorras a nivel nacional, 
-              reconocida por nuestra calidad, innovación y compromiso 
-              con la satisfacción del cliente.
+              Convertirnos en la marca referente de gorras con identidad ecuatoriana 
+              a nivel nacional e internacional, reconocida por su creatividad, 
+              calidad y capacidad de transmitir en cada diseño la esencia de nuestra tierra. 
+              Queremos que cada persona que lleve una de nuestras gorras se sienta embajadora de la cultura ecuatoriana 
+              en cualquier parte del mundo.
             </p>
           </div>
         </Card.Body>

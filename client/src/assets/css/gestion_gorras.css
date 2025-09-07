@@ -1,0 +1,121 @@
+/* Estilos específicos para la gestión de gorras */
+.tabla-productos {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla-productos th,
+.tabla-productos td {
+  padding: 12px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+/* Hacer la tabla responsive */
+@media (max-width: 1200px) {
+  .tabla-productos {
+    font-size: 14px;
+  }
+  
+  .tabla-productos th,
+  .tabla-productos td {
+    padding: 10px 8px;
+  }
+}
+
+@media (max-width: 992px) {
+  .tabla-productos {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  
+  .tabla-productos thead {
+    display: none;
+  }
+  
+  .tabla-productos tbody tr {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 15px 0;
+    border-bottom: 2px solid var(--line);
+  }
+  
+  .tabla-productos td {
+    border: 0;
+    padding: 8px 0;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  
+  .tabla-productos td::before {
+    content: attr(data-label);
+    min-width: 100px;
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 12px;
+  }
+  
+  /* Ajustes específicos para columnas */
+  .tabla-productos td:nth-child(1)::before { content: "ID:"; }
+  .tabla-productos td:nth-child(2)::before { content: "Nombre:"; }
+  .tabla-productos td:nth-child(3)::before { content: "Tipo:"; }
+  .tabla-productos td:nth-child(4)::before { content: "Talla:"; }
+  .tabla-productos td:nth-child(5)::before { content: "Color:"; }
+  .tabla-productos td:nth-child(6)::before { content: "Precio:"; }
+  .tabla-productos td:nth-child(7)::before { content: "Stock:"; }
+  .tabla-productos td:nth-child(8)::before { content: "Disponible:"; }
+  .tabla-productos td:nth-child(9)::before { content: "Acciones:"; }
+  
+  /* Ajustes para la columna de acciones en móviles */
+  .tabla-productos td:nth-child(9) {
+    grid-column: span 2;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 576px) {
+  .tabla-productos tbody tr {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+  .tabla-productos td {
+    justify-content: space-between;
+  }
+  
+  .tabla-productos td::before {
+    min-width: 80px;
+  }
+  
+  .tabla-productos td:nth-child(9) {
+    grid-column: 1;
+  }
+  
+  /* Botones en columna para móviles muy pequeños */
+  .tabla-productos td:nth-child(9) .d-flex {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .tabla-productos td:nth-child(9) .btn {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+}
+
+/* Mejoras para la tabla en vista normal */
+.tabla-productos .btn {
+  padding: 6px 12px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+/* Asegurar que la columna de ID no sea demasiado ancha */
+.tabla-productos td:first-child {
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

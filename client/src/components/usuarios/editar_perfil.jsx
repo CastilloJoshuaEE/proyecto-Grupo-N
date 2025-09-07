@@ -3,6 +3,7 @@ import { Container, Form, Button, Alert, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext';
 import { toast } from 'react-hot-toast';
+import '../../assets/css/registro.css';
 
 const EditarPerfil = () => {
   const [formData, setFormData] = useState({

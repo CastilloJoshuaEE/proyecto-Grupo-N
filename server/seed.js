@@ -63,10 +63,10 @@ const datosIniciales = async () => {
     const gorrasExistentes = await Gorra.countDocuments();
     
     if (gorrasExistentes === 0) {
-      // Crear gorras iniciales - RUTAS CORREGIDAS para el cliente
+      // Crear gorras iniciales
       const gorras = [
         {
-          nombre: 'Gorra Deportiva',
+          nombre: 'Gorra Deportiva con logo',
           tipo: 'deportiva',
           talla: 'M',
           color: 'Negro',
@@ -90,7 +90,7 @@ const datosIniciales = async () => {
           destacada: true
         },
         {
-          nombre: 'Gorra Casual',
+          nombre: 'Gorra casual perfecta para el día a día',
           tipo: 'casual',
           talla: 'S',
           color: 'Azul',

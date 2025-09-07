@@ -8,7 +8,7 @@ import { toast } from 'react-hot-toast';
 const FinalizarCompra = () => {
   const [carrito, setCarrito] = useState({ items: [], total: 0 });
   const [usuario, setUsuario] = useState(null);
-const [direccionEditada, setDireccionEditada] = useState('');
+  const [direccionEditada, setDireccionEditada] = useState('');
   const { vaciarCarrito } = useCarrito();
   const [metodoPago, setMetodoPago] = useState('efectivo');
   const [datosTransferencia, setDatosTransferencia] = useState({
@@ -62,6 +62,7 @@ const [direccionEditada, setDireccionEditada] = useState('');
         const datosUsuario = await respuestaUsuario.json();
         if (datosUsuario.success) {
           setUsuario(datosUsuario.data);
+          setDireccionEditada(datosUsuario.data.direccion || '');
         }
       }
     } catch (error) {
@@ -70,7 +71,7 @@ const [direccionEditada, setDireccionEditada] = useState('');
       setCargando(false);
     }
   };
-  // Función para actualizar la dirección del usuario
+
   const actualizarDireccion = async () => {
     try {
       const token = localStorage.getItem('token');
@@ -95,46 +96,46 @@ const [direccionEditada, setDireccionEditada] = useState('');
       toast.error('Error al actualizar la dirección');
     }
   }; 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  
-  if (metodoPago === 'transferencia' && !datosTransferencia.cuenta_origen) {
-    toast.error('Complete los datos de transferencia');
-    return;
-  }
 
-  try {
-    const token = localStorage.getItem('token');
-    const datosPago = {
-      metodo_pago: metodoPago,
-      datos_transferencia: metodoPago === 'transferencia' ? datosTransferencia : null
-    };
-
-    const respuesta = await fetch(`${API_URL}/api/compras/finalizar`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify(datosPago)
-    });
-
-    if (!respuesta.ok) {
-      const errorData = await respuesta.json();
-      throw new Error(errorData.message || 'Error al procesar la compra');
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (metodoPago === 'transferencia' && !datosTransferencia.cuenta_origen) {
+      toast.error('Complete los datos de transferencia');
+      return;
     }
 
-    const datos = await respuesta.json();
-    if (datos.success) {
-      // Vaciar el carrito usando la función del contexto
-      await vaciarCarrito();
-      toast.success('Compra realizada exitosamente');
-      navigate(`/compra-exitosa?id=${datos.data._id}`);
+    try {
+      const token = localStorage.getItem('token');
+      const datosPago = {
+        metodo_pago: metodoPago,
+        datos_transferencia: metodoPago === 'transferencia' ? datosTransferencia : null
+      };
+
+      const respuesta = await fetch(`${API_URL}/api/compras/finalizar`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(datosPago)
+      });
+
+      if (!respuesta.ok) {
+        const errorData = await respuesta.json();
+        throw new Error(errorData.message || 'Error al procesar la compra');
+      }
+
+      const datos = await respuesta.json();
+      if (datos.success) {
+        await vaciarCarrito();
+        toast.success('Compra realizada exitosamente');
+        navigate(`/compra-exitosa?id=${datos.data._id}`);
+      }
+    } catch (error) {
+      toast.error(error.message);
     }
-  } catch (error) {
-    toast.error(error.message);
-  }
-};
+  };
 
   const guardarDatosTransferencia = () => {
     if (!datosTransferencia.cuenta_origen || !datosTransferencia.fecha_transferencia) {
@@ -157,11 +158,19 @@ const handleSubmit = async (e) => {
   }
 
   return (
-    <Container className="my-5">
-      <h1 className="mb-4">Finalizar compra</h1>
+    <Container className="my-5 finalizar-compra-container">
+      <Button 
+        variant="outline-secondary" 
+        onClick={() => navigate('/carrito')}
+        className="mb-3"
+      >
+        ← Cancelar
+      </Button>
+
+      <h1 className="mb-4">Completar compra</h1>
 
       <Row>
-        <Col md={8}>
+        <Col lg={8}>
           <Form onSubmit={handleSubmit} id="formulario-pago">
             <h2>Datos personales</h2>
             <p className="text-muted">
@@ -196,7 +205,7 @@ const handleSubmit = async (e) => {
               </Col>
             </Row>
 
-         <Form.Group className="mb-3">
+            <Form.Group className="mb-3">
               <Form.Label>Dirección:</Form.Label>
               <div className="d-flex align-items-center">
                 <Form.Control
@@ -310,15 +319,12 @@ const handleSubmit = async (e) => {
               <Button type="submit" variant="primary" size="lg">
                 Completar compra
               </Button>
-              <Button variant="secondary" onClick={() => navigate('/carrito')}>
-                Cancelar
-              </Button>
             </div>
           </Form>
         </Col>
 
-        <Col md={4}>
-          <div className="sticky-top" style={{ top: '20px' }}>
+        <Col lg={4}>
+          <div className="resumen-pedido-container">
             <h3>Resumen de pedido</h3>
             <Table className="tabla-productos">
               <thead>
@@ -371,7 +377,7 @@ const handleSubmit = async (e) => {
               <Form.Label>Cuenta de origen</Form.Label>
               <Form.Control
                 type="number"
-                placeholder="0123456789"
+                placeholder="Ej: 0123456789"
                 value={datosTransferencia.cuenta_origen}
                 onChange={(e) => setDatosTransferencia({
                   ...datosTransferencia,
@@ -392,7 +398,7 @@ const handleSubmit = async (e) => {
               <Form.Label>Nombre del beneficiario</Form.Label>
               <Form.Control
                 type="text"
-                value="Gorras Premium S.A."
+                value="Kawsay Caps S.A."
                 readOnly
               />
             </Form.Group>

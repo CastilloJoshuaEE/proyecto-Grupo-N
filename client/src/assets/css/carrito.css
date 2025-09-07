@@ -16,12 +16,15 @@
   padding: clamp(16px, 2.4vw, 24px);
   box-shadow: var(--shadow);
   border: 1px solid var(--line);
+  margin: 0 auto;
+  max-width: 1200px;
 }
 
 .tabla-factura{
   width:100%;
   border-collapse: collapse;
   font-size: 14px;
+  table-layout: fixed;
 }
 .tabla-factura th,
 .tabla-factura td{
@@ -29,16 +32,35 @@
   text-align: left;
   border-bottom: 1px solid var(--line);
   vertical-align: middle;
+  word-wrap: break-word;
 }
 .tabla-factura th{
   background:#f8fafc;
   font-weight: 700;
   color: var(--ink);
+  position: sticky;
+  top: 0;
 }
 .tabla-factura tfoot tr.total{
   background:#f1f5f9;
   font-weight: 800;
 }
+
+/* Específico para columnas */
+.tabla-factura th:nth-child(1),
+.tabla-factura td:nth-child(1) { width: 25%; } /* Producto */
+.tabla-factura th:nth-child(2),
+.tabla-factura td:nth-child(2) { width: 10%; } /* Color */
+.tabla-factura th:nth-child(3),
+.tabla-factura td:nth-child(3) { width: 8%; }  /* Talla */
+.tabla-factura th:nth-child(4),
+.tabla-factura td:nth-child(4) { width: 12%; } /* Precio */
+.tabla-factura th:nth-child(5),
+.tabla-factura td:nth-child(5) { width: 10%; } /* Cantidad */
+.tabla-factura th:nth-child(6),
+.tabla-factura td:nth-child(6) { width: 12%; } /* Total */
+.tabla-factura th:nth-child(7),
+.tabla-factura td:nth-child(7) { width: 23%; } /* Acciones */
 
 .acciones-carrito{
   display:flex;
@@ -53,39 +75,161 @@
   appearance:none;
   border:none;
   border-radius: 10px;
-  padding: 10px 16px;
+  padding: 12px 24px;
   color:#fff;
   font-weight:700;
   cursor:pointer;
-  transition: transform .06s ease, opacity .2s ease;
+  transition: all 0.3s ease;
+  font-size: 16px;
 }
-.btn-vaciar{ background: var(--danger); }
-.btn-vaciar:hover{ opacity:.9 }
-.btn-pagar{ background: var(--ok); }
-.btn-pagar:hover{ opacity:.92 }
-.btn-vaciar:active,
-.btn-pagar:active{ transform: translateY(1px) }
+.btn-vaciar{ 
+  background: var(--danger);
+  border: 2px solid var(--danger);
+}
+.btn-vaciar:hover{ 
+  background: #b91c1c;
+  border-color: #b91c1c;
+  transform: translateY(-2px);
+}
+.btn-pagar{ 
+  background: var(--ok);
+  border: 2px solid var(--ok);
+}
+.btn-pagar:hover{ 
+  background: #15803d;
+  border-color: #15803d;
+  transform: translateY(-2px);
+}
+
+/* Mejoras visuales */
+.tabla-factura tr:hover {
+  background-color: #f8fafc;
+}
+
+.tabla-factura input[type="number"] {
+  width: 70px;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  text-align: center;
+}
+
+/* Botones de acciones */
+.tabla-factura .btn {
+  padding: 6px 12px;
+  font-size: 13px;
+}
 
 /* ===== Responsive ===== */
-@media (max-width: 900px){
-  .tabla-factura{ font-size: 13px; }
+@media (max-width: 1200px){
+  .contenedor-carrito {
+    margin: 0 20px;
+  }
 }
+
+@media (max-width: 900px){
+  .tabla-factura{ 
+    font-size: 13px;
+  }
+  .tabla-factura th,
+  .tabla-factura td{
+    padding: 10px 8px;
+  }
+}
+
+@media (max-width: 768px){
+  .contenedor-carrito {
+    margin: 0 15px;
+    padding: 12px;
+  }
+  
+  .tabla-factura {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  
+  .acciones-carrito{
+    justify-content:center;
+    flex-direction: column;
+  }
+  
+  .btn-vaciar,
+  .btn-pagar{
+    width: 100%;
+    margin-bottom: 8px;
+  }
+}
+
 @media (max-width: 700px){
-
-
   .tabla-factura thead{ display:none; }
-  .tabla-factura tr{ display:grid; grid-template-columns: 1fr 1fr; gap:8px; padding:10px 0; }
+  .tabla-factura tr{ 
+    display:grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap:12px; 
+    padding:15px 0; 
+    border-bottom: 2px solid var(--line);
+  }
   .tabla-factura td{
     border:0;
-    padding:6px 0;
-    display:flex; gap:8px;
+    padding:8px 0;
+    display:flex; 
+    gap:8px;
+    align-items: center;
   }
   .tabla-factura td::before{
     content: attr(data-label);
-    min-width:110px;
+    min-width:100px;
     color: var(--muted);
     font-weight:600;
+    font-size: 12px;
   }
-  .acciones-carrito{ justify-content:stretch; }
-  .btn-vaciar, .btn-pagar{ width:100%; }
+  
+  /* Asignar etiquetas específicas */
+  .tabla-factura td:nth-child(1)::before { content: "Producto:"; }
+  .tabla-factura td:nth-child(2)::before { content: "Color:"; }
+  .tabla-factura td:nth-child(3)::before { content: "Talla:"; }
+  .tabla-factura td:nth-child(4)::before { content: "Precio:"; }
+  .tabla-factura td:nth-child(5)::before { content: "Cantidad:"; }
+  .tabla-factura td:nth-child(6)::before { content: "Total:"; }
+  .tabla-factura td:nth-child(7)::before { content: "Acciones:"; }
+  
+  /* Ajustes específicos para la vista móvil */
+  .tabla-factura td:nth-child(7) {
+    grid-column: span 2;
+    justify-content: center;
+  }
+  
+  .tabla-factura tfoot tr {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .tabla-factura tfoot td {
+    justify-content: center;
+  }
+  
+  .tabla-factura tfoot td[colspan]::before {
+    content: "";
+    display: none;
+  }
+}
+
+@media (max-width: 480px){
+  .tabla-factura tr{ 
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+  .tabla-factura td{
+    justify-content: space-between;
+  }
+  
+  .tabla-factura td::before{
+    min-width: 80px;
+  }
+  
+  .tabla-factura td:nth-child(7) {
+    grid-column: 1;
+  }
 }

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Table, Button, Alert, Card } from 'react-bootstrap';
+import { Container, Table, Button, Alert, Card, Row, Col } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext';
 import { toast } from 'react-hot-toast';
+import '../../assets/css/gestion_gorras.css';
 
 const GestionGorras = () => {
   const [gorras, setGorras] = useState([]);
@@ -89,11 +90,16 @@ const GestionGorras = () => {
     <Container className="my-5">
       <h1 className="mb-4 text-center">Panel de gestión de gorras</h1>
 
-      <div className="text-end mb-3">
-        <Link to="/admin/gorras/crear" className="btn btn-success">
-          + Registrar gorra
-        </Link>
-      </div>
+      <Row className="mb-3">
+        <Col>
+          <Link to="/admin/dashboard" className="btn btn-secondary me-2">
+            ⬅ Volver al panel administrativo
+          </Link>
+          <Link to="/admin/gorras/crear" className="btn btn-success">
+            + Registrar gorra
+          </Link>
+        </Col>
+      </Row>
 
       <Card className="p-4">
         <h2>Lista de gorras</h2>
@@ -103,7 +109,7 @@ const GestionGorras = () => {
           </Alert>
         ) : (
           <div className="table-responsive">
-            <Table className="tabla-factura">
+            <Table className="tabla-productos" responsive>
               <thead>
                 <tr>
                   <th>ID</th>
@@ -120,28 +126,30 @@ const GestionGorras = () => {
               <tbody>
                 {gorras.map((gorra) => (
                   <tr key={gorra._id}>
-                    <td>{gorra._id}</td>
-                    <td>{gorra.nombre}</td>
-                    <td>{gorra.tipo}</td>
-                    <td>{gorra.talla}</td>
-                    <td>{gorra.color}</td>
-                    <td>${gorra.precio.toFixed(2)}</td>
-                    <td>{gorra.stock}</td>
-                    <td>{gorra.disponible ? 'Sí' : 'No'}</td>
-                    <td>
-                      <Link
-                        to={`/admin/gorras/editar/${gorra._id}`}
-                        className="btn btn-sm btn-warning me-2"
-                      >
-                        Editar
-                      </Link>
-                      <Button
-                        variant="danger"
-                        size="sm"
-                        onClick={() => handleEliminar(gorra._id)}
-                      >
-                        Eliminar
-                      </Button>
+                    <td data-label="ID">{gorra._id.substring(0, 8)}...</td>
+                    <td data-label="Nombre">{gorra.nombre}</td>
+                    <td data-label="Tipo">{gorra.tipo}</td>
+                    <td data-label="Talla">{gorra.talla}</td>
+                    <td data-label="Color">{gorra.color}</td>
+                    <td data-label="Precio">${gorra.precio.toFixed(2)}</td>
+                    <td data-label="Stock">{gorra.stock}</td>
+                    <td data-label="Disponible">{gorra.disponible ? 'Sí' : 'No'}</td>
+                    <td data-label="Acciones">
+                      <div className="d-flex flex-wrap gap-1">
+                        <Link
+                          to={`/admin/gorras/editar/${gorra._id}`}
+                          className="btn btn-sm btn-warning"
+                        >
+                          Editar
+                        </Link>
+                        <Button
+                          variant="danger"
+                          size="sm"
+                          onClick={() => handleEliminar(gorra._id)}
+                        >
+                          Eliminar
+                        </Button>
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -150,12 +158,6 @@ const GestionGorras = () => {
           </div>
         )}
       </Card>
-
-      <div className="mt-4">
-        <Link to="/admin/dashboard" className="btn btn-secondary">
-          ⬅ Volver al panel administrativo
-        </Link>
-      </div>
     </Container>
   );
 };

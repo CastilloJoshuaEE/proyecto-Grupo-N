@@ -18,11 +18,27 @@ const Accesibilidad = () => {
     root.style.setProperty('--espaciado-texto', `${espaciadoTexto}%`);
     root.style.setProperty('--altura-linea', `${alturaLinea}%`);
      // Aplicar o quitar filtro de grises
+    // Aplicar o quitar filtro de grises excluyendo modales
     if (grayscale) {
-      document.body.style.filter = 'grayscale(100%)';
+      // Crear un contenedor para todo el contenido excepto modales
+      const mainContent = document.querySelector('main, header, footer');
+      if (mainContent) {
+        mainContent.style.filter = 'grayscale(100%)';
+      }
+      
+      // Asegurarse de que los modales no tengan filtro
+      const modals = document.querySelectorAll('.modal, .modal-content, .modal-backdrop');
+      modals.forEach(modal => {
+        modal.style.filter = 'none';
+      });
     } else {
-      document.body.style.filter = '';
+      // Quitar filtro de grises
+      const mainContent = document.querySelector('main, header, footer');
+      if (mainContent) {
+        mainContent.style.filter = '';
+      }
     }
+
 
     // Aplicar estilos a todos los elementos de texto EXCLUYENDO el componente de accesibilidad
     const elementosTexto = document.querySelectorAll(`
@@ -66,7 +82,11 @@ const Accesibilidad = () => {
       root.style.removeProperty('--tamano-texto');
       root.style.removeProperty('--espaciado-texto');
       root.style.removeProperty('--altura-linea');
-      document.body.style.filter = ''; // quitar grises
+
+      const mainContent = document.querySelector('main, header, footer');
+      if (mainContent) {
+        mainContent.style.filter = '';
+      }
       const elementosTexto = document.querySelectorAll(`
         body, 
         p, 

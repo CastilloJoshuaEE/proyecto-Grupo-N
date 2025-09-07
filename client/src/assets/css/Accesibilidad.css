@@ -1,9 +1,34 @@
 /* Estilos específicos para el componente de accesibilidad */
+.modal,
+.modal-content,
+.modal-backdrop,
+.modal-dialog,
+.modal-header,
+.modal-body,
+.modal-footer {
+  filter: none !important;
+  font-size: initial !important;
+  letter-spacing: initial !important;
+  line-height: initial !important;
+}
+
+/* Cuando el filtro de grises está activo, asegurar que los modales sean visibles */
+body.grayscale-activo .modal,
+body.grayscale-activo .modal-content,
+body.grayscale-activo .modal-backdrop {
+  filter: none !important;
+}
+
+/* Estilos específicos para el componente de accesibilidad */
 .accesibilidad-container {
   /* Asegurar que los estilos de accesibilidad no se apliquen a este componente */
   font-size: 16px !important;
   letter-spacing: normal !important;
   line-height: 1.5 !important;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
 }
 
 .accesibilidad-container * {
@@ -95,4 +120,18 @@ body.accesibilidad-activa .form-control:not(.accesibilidad-container .form-contr
   font-size: var(--tamano-texto, 100%) !important;
   letter-spacing: calc((var(--espaciado-texto) - 100) / 100 * 0.1em) !important;
   line-height: var(--altura-linea, 1.5) !important;
+}
+/* En dispositivos móviles, ajustar posición para evitar superposiciones */
+@media (max-width: 768px) {
+  .accesibilidad-container {
+    bottom: 70px; /* Subir un poco el botón para evitar superposición con navegación móvil */
+    right: 15px;
+  }
+  
+  .accesibilidad-menu {
+    max-width: 90vw;
+    right: 0;
+    left: auto;
+    transform: translateX(0);
+  }
 }

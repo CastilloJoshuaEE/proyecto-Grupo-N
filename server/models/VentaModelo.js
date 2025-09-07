@@ -149,7 +149,11 @@ ventaSchema.statics.generarReferenciaTransferencia = function() {
 ventaSchema.statics.crearVenta = async function(idUsuario, metodoPago, datosTransferencia = null) {
   const Carrito = mongoose.model('Carrito');
   const Gorra = mongoose.model('Gorra');
-  
+  const Usuario = mongoose.model('Usuario');
+  const usuario = await Usuario.findById(idUsuario);
+  if (!usuario) {
+    throw new Error('Usuario no encontrado');
+  }
   // Obtener carrito activo del usuario
   const carrito = await Carrito.findOne({ 
     id_usuario: idUsuario, 
@@ -224,15 +228,26 @@ ventaSchema.statics.crearVenta = async function(idUsuario, metodoPago, datosTran
     await carrito.save();
     
     // Crear la venta
-    const venta = new this({
-      id_usuario: idUsuario,
-      id_carrito: carrito._id,
-      items: itemsVenta,
-      total,
-      metodo_pago: metodoPago,
-      factura: factura,
-      datos_transferencia: datosTransferenciaFinal
-    });
+  const venta = new this({
+    id_usuario: idUsuario,
+    id_carrito: carrito._id,
+    items: itemsVenta,
+    total,
+    metodo_pago: metodoPago,
+    factura: factura,
+    datos_transferencia: datosTransferenciaFinal,
+    // Guardar información del usuario en la venta para fácil acceso
+    info_usuario: {
+      nombre: usuario.nombre,
+      apellido: usuario.apellido,
+      cedula: usuario.cedula,
+      correo: usuario.correo,
+      telefono: usuario.telefono,
+      direccion: usuario.direccion,
+      ciudad: usuario.ciudad || 'Guayaquil',
+      pais: usuario.pais || 'Ecuador'
+    }
+  });
     
     await venta.save();
     return venta;

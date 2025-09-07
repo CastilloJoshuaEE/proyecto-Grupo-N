@@ -131,122 +131,130 @@ const Catalogo = () => {
     );
   }
 
-  return (
-    <Container className="my-5">
-      <h1 className="text-center mb-4">Catálogo de Gorras</h1>
+return (
+  <Container className="my-5">
+    <h1 className="text-center mb-4">Catálogo de Gorras</h1>
+    
+    {/* Mostrar búsqueda actual */}
+    {filtros.busqueda && (
+      <Alert variant="info" className="mb-4">
+        Mostrando resultados para: <strong>"{filtros.busqueda}"</strong>
+        <Button 
+          variant="outline-info" 
+          size="sm" 
+          className="ms-3"
+          onClick={() => {
+            setFiltros(prev => ({ ...prev, busqueda: '' }));
+            navigate('/catalogo');
+          }}
+        >
+          Limpiar búsqueda
+        </Button>
+      </Alert>
+    )}
+    
+    {/* Filtros - DISEÑO MEJORADO */}
+    <section className="filters-section">
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h2 className="mb-0">
+          <i className="bi bi-funnel me-2"></i>
+          Filtrar gorras
+        </h2>
+        <Button variant="outline-secondary" onClick={limpiarFiltros} size="sm">
+          <i className="bi bi-x-circle me-1"></i>
+          Limpiar todos los filtros
+        </Button>
+      </div>
       
-      {/* Mostrar búsqueda actual */}
-      {filtros.busqueda && (
-        <Alert variant="info" className="mb-4">
-          Mostrando resultados para: <strong>"{filtros.busqueda}"</strong>
-          <Button 
-            variant="outline-info" 
-            size="sm" 
-            className="ms-3"
-            onClick={() => {
-              setFiltros(prev => ({ ...prev, busqueda: '' }));
-              navigate('/catalogo');
-            }}
-          >
-            Limpiar búsqueda
-          </Button>
-        </Alert>
-      )}
-      
-      {/* Filtros */}
-      <section className="filters-section">
-        <div className="d-flex justify-content-between align-items-center mb-3">
-          <h2 className="mb-0">Filtrar gorras</h2>
-          <Button variant="outline-secondary" onClick={limpiarFiltros}>
-            Limpiar todos los filtros
-          </Button>
-        </div>
-        
-        <Form onSubmit={aplicarFiltros} id="filter-form">
-          <Row>
-            <Col md={3}>
-              <Form.Group className="filter-group">
-                <Form.Label>Tipo de gorra:</Form.Label>
-                <Form.Select 
-                  name="tipo"
-                  value={filtros.tipo} 
-                  onChange={handleFiltroChange}
-                >
-                  <option value="">Todos los tipos</option>
-                  <option value="deportiva">Deportiva</option>
-                  <option value="elegante">Elegante</option>
-                  <option value="casual">Casual</option>
-                  <option value="personalizada">Personalizada</option>
-                </Form.Select>
-              </Form.Group>
-            </Col>
-            <Col md={2}>
-              <Form.Group className="filter-group">
-                <Form.Label>Talla:</Form.Label>
-                <Form.Select 
-                  name="talla"
-                  value={filtros.talla} 
-                  onChange={handleFiltroChange}
-                >
-                  <option value="">Todas</option>
-                  <option value="S">S</option>
-                  <option value="M">M</option>
-                  <option value="L">L</option>
-                  <option value="XL">XL</option>
-                </Form.Select>
-              </Form.Group>
-            </Col>
-            <Col md={2}>
-              <Form.Group className="filter-group">
-                <Form.Label>Precio mínimo:</Form.Label>
+      <Form onSubmit={aplicarFiltros} id="filter-form">
+        <Row className="g-3">
+          <Col md={3}>
+            <Form.Group className="filter-group">
+              <Form.Label className="fw-semibold">Tipo de gorra:</Form.Label>
+              <Form.Select 
+                name="tipo"
+                value={filtros.tipo} 
+                onChange={handleFiltroChange}
+                className="form-select-sm"
+              >
+                <option value="">Todos los tipos</option>
+                <option value="deportiva">Deportiva</option>
+                <option value="elegante">Elegante</option>
+                <option value="casual">Casual</option>
+                <option value="personalizada">Personalizada</option>
+              </Form.Select>
+            </Form.Group>
+          </Col>
+          <Col md={2}>
+            <Form.Group className="filter-group">
+              <Form.Label className="fw-semibold">Talla:</Form.Label>
+              <Form.Select 
+                name="talla"
+                value={filtros.talla} 
+                onChange={handleFiltroChange}
+                className="form-select-sm"
+              >
+                <option value="">Todas</option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+              </Form.Select>
+            </Form.Group>
+          </Col>
+          <Col md={3}>
+            <Form.Group className="filter-group">
+              <Form.Label className="fw-semibold">Rango de precio:</Form.Label>
+              <div className="d-flex align-items-center gap-2">
                 <Form.Control 
                   type="number" 
                   name="precio_min"
-                  placeholder="Mínimo"
+                  placeholder="Mín"
                   value={filtros.precio_min}
                   onChange={handleFiltroChange}
                   min="0"
                   step="0.1"
+                  className="form-control-sm"
                 />
-              </Form.Group>
-            </Col>
-            <Col md={2}>
-              <Form.Group className="filter-group">
-                <Form.Label>Precio máximo:</Form.Label>
+                <span className="text-muted">-</span>
                 <Form.Control 
                   type="number" 
                   name="precio_max"
-                  placeholder="Máximo"
+                  placeholder="Máx"
                   value={filtros.precio_max}
                   onChange={handleFiltroChange}
                   min="0"
                   step="0.1"
+                  className="form-control-sm"
                 />
-              </Form.Group>
-            </Col>
-            <Col md={3}>
-              <Form.Group className="filter-group">
-                <Form.Label>Buscar:</Form.Label>
+              </div>
+            </Form.Group>
+          </Col>
+          <Col md={3}>
+            <Form.Group className="filter-group">
+              <Form.Label className="fw-semibold">Buscar:</Form.Label>
+              <div className="input-group">
                 <Form.Control 
                   type="text" 
                   name="busqueda"
                   placeholder="Buscar gorras..."
                   value={filtros.busqueda}
                   onChange={handleFiltroChange}
+                  className="form-control-sm"
                 />
-              </Form.Group>
-            </Col>
-          </Row>
-          <div className="d-flex gap-2 mt-3">
-            <Button type="submit" variant="primary" className="btn-filtrar">
-              Aplicar Filtros
-            </Button>
-            <Button type="button" variant="outline-secondary" onClick={limpiarFiltros}>
-              Limpiar
-            </Button>
-          </div>
-        </Form>
-      </section>
+                <Button 
+                  type="submit" 
+                  variant="primary" 
+                  className="btn-sm"
+                >Aplicar
+                  <i className="bi bi-search"></i>
+                </Button>
+              </div>
+            </Form.Group>
+          </Col>
+        </Row>
+      </Form>
+    </section>
 
       {/* Lista de gorras */}
       <section className="catalogo-grid">

@@ -1,118 +1,92 @@
 :root{
   --brand:#8B0000;
   --brand-2:#6B0000;
+  --gold:#FFD700;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --warning:#eab308;
+  --info:#0ea5e9;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 :where(body){
-  font-family: Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   margin:0;
   padding:0;
+  line-height: 1.6;
 }
 
-:where(main){ padding:1rem; }
+:where(main){ 
+  padding:2rem 0;
+  flex: 1;
+}
+
 :where(footer){
   text-align:center;
-  padding:1rem;
-  background:#f0f0f0;
-  margin-top:2rem;
+  padding:2rem 1rem;
+  background:#1f2937;
+  color: white;
+  margin-top:auto;
 }
 
-:where(button){
-  background:var(--brand);
-  color:#fff;
-  border:none;
-  cursor:pointer;
-}
-:where(button:hover){ background:var(--brand-2); }
-
-:where(header){ background:var(--brand); color:#fff; padding:1rem; }
-:where(nav) a{
-  color:#fff;
-  margin-right:1rem;
-  text-decoration:none;
+/* Mejoras específicas para componentes comunes */
+:where(.btn){
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
 }
 
-:where(.dropdown){ position:relative; }
-:where(.dropbtn){
-  background:transparent;
-  border:none;
-  color:#fff;
-  cursor:pointer;
-  padding:6px 10px;
-}
-:where(.dropdown-content){
-  display:none;
-  position:absolute;
-  top:30px; right:0;
-  background:#fff; border:1px solid #ccc; border-radius:4px;
-  overflow:hidden; z-index:10;
-}
-:where(.dropdown-content a){
-  display:block; padding:8px 12px; color:#333; text-decoration:none; white-space:nowrap;
-}
-:where(.dropdown-content a:hover){ background:#f2f2f2; }
-.dropdown:hover .dropdown-content{ display:block; }
-
-:where(.tabla-factura, .tabla-productos){
-  width:100%;
-  border-collapse:collapse;
-  margin:1rem 0;
-  font-size:0.9rem;
-  box-shadow:0 0 10px rgba(0,0,0,0.05);
-  border-radius:8px;
-  overflow:hidden;
-  background:#fff;
-}
-:where(.tabla-factura thead tr, .tabla-productos thead tr){
-  background-color:#6c757d;
-  color:#fff;
-  text-align:left;
-}
-:where(.tabla-factura th, .tabla-productos th){
-  padding:12px 15px;
-  font-weight:600;
-  text-transform:uppercase;
-  font-size:0.8rem;
-  letter-spacing:0.5px;
-}
-:where(.tabla-factura td, .tabla-productos td){
-  padding:12px 15px;
-  border-bottom:1px solid #e0e0e0;
-  vertical-align:middle;
-}
-:where(.tabla-factura tbody tr:nth-child(even),
-       .tabla-productos tbody tr:nth-child(even)){
-  background-color:#f8f9fa;
-}
-:where(.tabla-factura tbody tr:hover,
-       .tabla-productos tbody tr:hover){
-  background-color:#f1f1f1;
-}
-:where(.tabla-factura tfoot tr, .tabla-productos tfoot tr){
-  background-color:#f8f9fa;
-  font-weight:bold;
-}
-:where(.tabla-factura tfoot tr.total, .tabla-productos tfoot tr.total){
-  background-color:#e9ecef;
-  color:#212529;
-  font-size:1rem;
-}
-:where(.tabla-factura .btn, .tabla-productos .btn){
-  padding:5px 10px; font-size:0.8rem; margin:2px;
-}
-:where(.tabla-factura input[type="number"]){
-  width:70px; display:inline-block; margin-right:5px;
-}
-:where(.contenedor-detalle-venta .tabla-productos){
-  margin-top:1.5rem; margin-bottom:2rem;
+:where(.btn):hover {
+  transform: translateY(-2px);
 }
 
-@media (max-width: 768px){
-  :where(.tabla-factura, .tabla-productos){
-    display:block; overflow-x:auto;
+:where(.btn):active {
+  transform: translateY(0);
+}
+
+/* Mejoras de accesibilidad */
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+/* Mejoras de imágenes */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Utilidades de texto */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+/* Mejoras responsivas */
+@media (max-width: 768px) {
+  :where(main){ 
+    padding:1.5rem 0;
   }
-  :where(.tabla-factura th, .tabla-productos th,
-         .tabla-factura td, .tabla-productos td){
-    padding:8px 10px;
+  
+  :where(footer){
+    padding:1.5rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  :where(main){ 
+    padding:1rem 0;
+  }
+  
+  :where(footer){
+    padding:1rem 0.5rem;
   }
 }

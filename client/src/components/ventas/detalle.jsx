@@ -89,15 +89,19 @@ const DetalleVenta = () => {
     );
   }
 
+  // Obtener información del usuario - usar info_usuario si existe, sino usar id_usuario
+  const infoCliente = venta.info_usuario || venta.id_usuario;
+
   return (
     <Container className="my-5">
       {/* Información de la empresa */}
       <Card className="mb-4 print-section">
         <Card.Body className="text-center">
-          <h1>Gorras Premium S.A.</h1>
-          <p className="mb-1">Dirección: Guayas, Ecuador</p>
+          <h1>Kawsay Caps S.A.</h1>
+          <p className="mb-1">Guayas, Ecuador</p>
+          <p className="mb-1">Sucursal: R459+R4H, Victor Manuel Rendón, Guayaquil 090313</p>
           <p className="mb-1">
-            Correo electrónico: <a href="mailto:gorras.premium@gmail.com">gorras.premium@gmail.com</a>
+            Correo electrónico: <a href="mailto:kawsaycaps@gmail.com">kawsaycaps@gmail.com</a>
           </p>
           <p>Teléfono: <a href="tel:+593939850101">0939850101</a></p>
         </Card.Body>
@@ -146,10 +150,13 @@ const DetalleVenta = () => {
             <Card.Body>
               <p>
                 <strong>Nombre:</strong>{' '}
-                {venta.id_usuario?.nombre} {venta.id_usuario?.apellido}
+                {infoCliente.nombre} {infoCliente.apellido}
               </p>
-              <p><strong>Cédula:</strong> {venta.id_usuario?.cedula}</p>
-              <p><strong>Correo electrónico:</strong> {venta.id_usuario?.correo}</p>
+              <p><strong>Cédula:</strong> {infoCliente.cedula}</p>
+              <p><strong>Correo electrónico:</strong> {infoCliente.correo}</p>
+              <p><strong>Teléfono:</strong> {infoCliente.telefono || 'No especificado'}</p>
+              {/* MOSTRAR LA DIRECCIÓN AQUÍ */}
+              <p><strong>Dirección:</strong> {infoCliente.direccion || 'No especificada'}</p>
             </Card.Body>
           </Card>
         </Col>

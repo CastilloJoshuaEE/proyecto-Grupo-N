@@ -81,6 +81,7 @@ const Reportes = () => {
         
         <Form onSubmit={aplicarFiltros} className="row g-2">
           <div className="col-auto">
+            <p>Desde:</p>
             <Form.Control
               type="date"
               name="fecha_inicio"
@@ -89,6 +90,8 @@ const Reportes = () => {
             />
           </div>
           <div className="col-auto">
+            <p>Hasta:</p>
+
             <Form.Control
               type="date"
               name="fecha_fin"

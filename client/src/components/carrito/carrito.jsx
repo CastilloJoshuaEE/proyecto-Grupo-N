@@ -98,66 +98,71 @@ const Carrito = () => {
                 <tbody>
                   {carrito.items.map((item) => (
                     <tr key={item._id}>
-                      <td>{item.id_gorra?.nombre}</td>
-                      <td>{item.id_gorra?.color}</td>
-                      <td>{item.id_gorra?.talla}</td>
-                      <td>${item.precio_unitario?.toFixed(2)}</td>
-                      <td>
-                        <Form
-                          onSubmit={(e) => {
-                            e.preventDefault();
-                            const formData = new FormData(e.target);
-                            const cantidad = parseInt(formData.get('cantidad'));
-                            handleActualizarCantidad(item._id, cantidad);
+                      <td data-label="Producto">{item.id_gorra?.nombre}</td>
+                      <td data-label="Color">{item.id_gorra?.color}</td>
+                      <td data-label="Talla">{item.id_gorra?.talla}</td>
+                      <td data-label="Precio">${item.precio_unitario?.toFixed(2)}</td>
+                      <td data-label="Cantidad">
+                        <Form.Control
+                          type="number"
+                          name="cantidad"
+                          defaultValue={item.cantidad}
+                          min="1"
+                          max={item.id_gorra?.stock}
+                          style={{ width: '70px' }}
+                          onChange={(e) => {
+                            const cantidad = parseInt(e.target.value);
+                            if (cantidad >= 1 && cantidad <= item.id_gorra?.stock) {
+                              handleActualizarCantidad(item._id, cantidad);
+                            }
                           }}
-                          className="d-flex align-items-center"
-                        >
-                          <Form.Control
-                            type="number"
-                            name="cantidad"
-                            defaultValue={item.cantidad}
-                            min="1"
-                            max={item.id_gorra?.stock}
-                            style={{ width: '80px' }}
-                            className="me-2"
-                          />
-                          <Button type="submit" variant="outline-primary" size="sm">
-                            ✓ Actualizar
-                          </Button>
-                        </Form>
+                        />
                       </td>
-                      <td>${(item.precio_unitario * item.cantidad).toFixed(2)}</td>
-                      <td>
-                        <Button
-                          variant="danger"
-                          size="sm"
-                          onClick={() => handleEliminarItem(item._id)}
-                        >
-                          Eliminar
-                        </Button>
+                      <td data-label="Total">${(item.precio_unitario * item.cantidad).toFixed(2)}</td>
+                      <td data-label="Acciones">
+                        <div className="d-flex gap-2">
+                          <Button
+                            variant="outline-primary"
+                            size="sm"
+                            onClick={() => {
+                              const form = document.querySelector(`form[data-item="${item._id}"]`);
+                              const cantidad = parseInt(form?.querySelector('input[name="cantidad"]')?.value || item.cantidad);
+                              handleActualizarCantidad(item._id, cantidad);
+                            }}
+                          >
+                            Actualizar
+                          </Button>
+                          <Button
+                            variant="outline-danger"
+                            size="sm"
+                            onClick={() => handleEliminarItem(item._id)}
+                          >
+                            Eliminar
+                          </Button>
+                        </div>
                       </td>
                     </tr>
                   ))}
                 </tbody>
                 <tfoot>
                   <tr>
-                    <td colSpan="5">Subtotal:</td>
-                    <td>${carrito.subtotal?.toFixed(2) || '0.00'}</td>
+                    <td colSpan="5" className="text-end fw-bold">Subtotals</td>
+                    <td className="fw-bold">${carrito.subtotal?.toFixed(2) || '0.00'}</td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td colSpan="5">IVA (15%):</td>
+                    <td colSpan="5" className="text-end">IVA (15%):</td>
                     <td>${carrito.iva?.toFixed(2) || '0.00'}</td>
                     <td></td>
                   </tr>
                   <tr>
-                    <td colSpan="5">Transporte:</td>
+                    <td colSpan="5" className="text-end">Transporte:</td>
                     <td>Gratis</td>
                     <td></td>
                   </tr>
                   <tr className="total">
-                    <td colSpan="5">Total a pagar:</td>
-                    <td>${carrito.total?.toFixed(2) || '0.00'}</td>
+                    <td colSpan="5" className="text-end fw-bold">Total a pagar:</td>
+                    <td className="fw-bold">${carrito.total?.toFixed(2) || '0.00'}</td>
                     <td></td>
                   </tr>
                 </tfoot>
@@ -166,20 +171,28 @@ const Carrito = () => {
 
             <div className="acciones-carrito mt-4">
               <Row>
-                <Col>
+                <Col className="d-flex justify-content-between">
                   <Button
-                    variant="outline-danger"
-                    onClick={handleVaciarCarrito}
-                    className="me-2"
+                    variant="outline-secondary"
+                    onClick={() => navigate('/catalogo')}
                   >
-                    Vaciar carrito
+                    ← Seguir comprando
                   </Button>
-                  <Button
-                    variant="primary"
-                    onClick={() => navigate('/finalizar-compra')}
-                  >
-                    Continuar al pago
-                  </Button>
+                  <div>
+                    <Button
+                      variant="outline-danger"
+                      onClick={handleVaciarCarrito}
+                      className="me-2"
+                    >
+                      Vaciar carrito
+                    </Button>
+                    <Button
+                      variant="primary"
+                      onClick={() => navigate('/finalizar-compra')}
+                    >
+                      Continuar al pago
+                    </Button>
+                  </div>
                 </Col>
               </Row>
             </div>
