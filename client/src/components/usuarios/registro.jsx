@@ -78,68 +78,87 @@ const Registro = () => {
   };
 
   return (
-    <Container className="my-5">
-      <div className="row justify-content-center">
-        <div className="col-md-8">
-          <Card>
-            <Card.Header>
-              <h3 className="text-center mb-0">Registro de usuario</h3>
+    <Container className="login-container d-flex align-items-center justify-content-center py-5">
+      <Row className="justify-content-center w-100">
+        <Col md={10} lg={8} xl={7}>
+          <Card className="login-card shadow border-0">
+            <Card.Header className="bg-dark text-white text-center py-4">
+              <h2 className="mb-0 fw-bold">Registro de usuario</h2>
             </Card.Header>
-            <Card.Body>
-              {error && <Alert variant="danger">{error}</Alert>}
+            
+            <Card.Body className="p-5">
+              {error && <Alert variant="danger" className="mb-4">{error}</Alert>}
               
-              <Form onSubmit={handleSubmit}>
+              <Form onSubmit={handleSubmit} className="login-form">
                 <Row>
                   <Col md={6}>
-                    <Form.Group className="mb-3">
-                      <Form.Label>Nombre:</Form.Label>
+                    <Form.Group className="mb-4">
+                      <Form.Label className="fw-semibold text-dark mb-2">
+                        Nombre:
+                      </Form.Label>
                       <Form.Control
                         type="text"
                         name="nombre"
                         value={formData.nombre}
                         onChange={handleChange}
                         required
+                        className="py-3 px-4 border-2"
+                        placeholder="Ingrese su nombre"
                       />
                     </Form.Group>
                   </Col>
                   <Col md={6}>
-                    <Form.Group className="mb-3">
-                      <Form.Label>Apellido:</Form.Label>
+                    <Form.Group className="mb-4">
+                      <Form.Label className="fw-semibold text-dark mb-2">
+                        Apellido:
+                      </Form.Label>
                       <Form.Control
                         type="text"
                         name="apellido"
                         value={formData.apellido}
                         onChange={handleChange}
                         required
+                        className="py-3 px-4 border-2"
+                        placeholder="Ingrese su apellido"
                       />
                     </Form.Group>
                   </Col>
                 </Row>
 
-                <Form.Group className="mb-3">
-                  <Form.Label>Correo electrónico:</Form.Label>
+                <Form.Group className="mb-4">
+                  <Form.Label className="fw-semibold text-dark mb-2">
+                    Correo electrónico:
+                  </Form.Label>
                   <Form.Control
                     type="email"
                     name="correo"
                     value={formData.correo}
                     onChange={handleChange}
                     required
+                    className="py-3 px-4 border-2"
+                    placeholder="ejemplo@correo.com"
                   />
                 </Form.Group>
 
-                <Form.Group className="mb-3">
-                  <Form.Label>Dirección:</Form.Label>
+                <Form.Group className="mb-4">
+                  <Form.Label className="fw-semibold text-dark mb-2">
+                    Dirección:
+                  </Form.Label>
                   <Form.Control
                     type="text"
                     name="direccion"
                     value={formData.direccion}
                     onChange={handleChange}
                     required
+                    className="py-3 px-4 border-2"
+                    placeholder="Ingrese su dirección"
                   />
                 </Form.Group>
 
-                <Form.Group className="mb-3">
-                  <Form.Label>Teléfono:</Form.Label>
+                <Form.Group className="mb-4">
+                  <Form.Label className="fw-semibold text-dark mb-2">
+                    Teléfono:
+                  </Form.Label>
                   <Form.Control
                     type="text"
                     name="telefono"
@@ -149,14 +168,15 @@ const Registro = () => {
                     maxLength={10}
                     pattern="[0-9]{10}"
                     title="El teléfono debe contener exactamente 10 dígitos numéricos"
+                    className="py-3 px-4 border-2"
+                    placeholder="10 dígitos numéricos"
                   />
-                  <Form.Text className="text-muted">
-                    Solo números, 10 dígitos
-                  </Form.Text>
                 </Form.Group>
 
-                <Form.Group className="mb-3">
-                  <Form.Label>Cédula:</Form.Label>
+                <Form.Group className="mb-4">
+                  <Form.Label className="fw-semibold text-dark mb-2">
+                    Cédula:
+                  </Form.Label>
                   <Form.Control
                     type="text"
                     name="cedula"
@@ -166,14 +186,15 @@ const Registro = () => {
                     maxLength={10}
                     minLength={10}
                     title="La cédula debe contener exactamente 10 caracteres"
+                    className="py-3 px-4 border-2"
+                    placeholder="10 caracteres"
                   />
-                  <Form.Text className="text-muted">
-                    Exactamente 10 caracteres
-                  </Form.Text>
                 </Form.Group>
 
                 <Form.Group className="mb-4">
-                  <Form.Label>Contraseña:</Form.Label>
+                  <Form.Label className="fw-semibold text-dark mb-2">
+                    Contraseña:
+                  </Form.Label>
                   <div className="input-group">
                     <Form.Control
                       type={showPassword ? "text" : "password"}
@@ -182,18 +203,24 @@ const Registro = () => {
                       onChange={handleChange}
                       required
                       minLength={6}
+                      className="py-3 px-4 border-2 border-end-0"
+                      placeholder="Mínimo 6 caracteres"
                     />
                     <Button
                       variant="outline-secondary"
                       onClick={() => setShowPassword(!showPassword)}
+                      className="border-2 border-start-0 px-3"
+                      type="button"
                     >
-                      {showPassword ? 'Ocultar' : 'Mostrar'}
+                      {showPassword ? '🙈' : '👁️'}
                     </Button>
                   </div>
                 </Form.Group>
 
                 <Form.Group className="mb-4">
-                  <Form.Label>Confirmar Contraseña:</Form.Label>
+                  <Form.Label className="fw-semibold text-dark mb-2">
+                    Confirmar Contraseña:
+                  </Form.Label>
                   <Form.Control
                     type="password"
                     name="confirmar_contrasena"
@@ -201,26 +228,38 @@ const Registro = () => {
                     onChange={handleChange}
                     required
                     minLength={6}
+                    className="py-3 px-4 border-2"
+                    placeholder="Repita la contraseña"
                   />
                 </Form.Group>
 
-                <div className="d-grid mb-3">
-                  <Button type="submit" variant="primary" size="lg">
+                <div className="d-grid mb-4">
+                  <Button 
+                    type="submit" 
+                    variant="dark" 
+                    size="lg" 
+                    className="fw-bold py-3"
+                  >
                     Registrarse
                   </Button>
                 </div>
 
-                <div className="text-center">
-                  <span className="text-muted">¿Ya tienes cuenta? </span>
-                  <Link to="/login" className="btn btn-link p-0">
-                    Inicia sesión
-                  </Link>
+                <div className="text-center pt-3">
+                  <div className="d-flex justify-content-center align-items-center gap-3">
+                    <span className="text-muted">¿Ya tienes cuenta?</span>
+                    <Link 
+                      to="/login" 
+                      className="text-decoration-none text-primary fw-medium"
+                    >
+                      Inicia sesión
+                    </Link>
+                  </div>
                 </div>
               </Form>
             </Card.Body>
           </Card>
-        </div>
-      </div>
+        </Col>
+      </Row>
     </Container>
   );
 };

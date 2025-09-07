@@ -6,7 +6,20 @@ const Acerca = () => {
     <Container className="my-5">
       <Card className="bg-light p-5 rounded">
         <Card.Body className="text-center">
-          <h2 className="text-center mb-4">Sobre nosotros</h2>
+          <h1>Kawsay Caps S.A.</h1>
+          <p className="mb-1">Guayas, Ecuador</p>
+          <p className="mb-1">Sucursal: R459+R4H, Víctor Manuel Rendón, Guayaquil 090313</p>
+          <p className="mb-1">
+            Contáctanos a través de nuestro correo electrónico: 
+            <a href="mailto:kawsaycaps@gmail.com">kawsaycaps@gmail.com</a>
+          </p>
+          <p className="mb-1">
+            O llámanos al teléfono: 
+            <a href="tel:+593939850101">0939850101</a>
+          </p>
+          <p>
+            Estamos disponibles para tus pedidos o para crear una gorra con un eslogan aún más personalizado.
+          </p>
           <p className="text-center lead">Conoce al equipo detrás de Kawsay Caps S.A.</p>
 
           <h3 className="mt-4">Integrantes:</h3>
