@@ -302,7 +302,7 @@ const metodoPagoData = {
         <Card.Body>
           <div className="d-grid gap-2 d-md-flex justify-content-md-center">
             <Link to="/admin/clientes" className="btn btn-primary me-md-2">
-              📋 Gestión de clientes
+              📋 Gestión de usuarios
             </Link>
             <Link to="/admin/pedidos" className="btn btn-primary me-md-2">
               🧾 Historial de pedidos

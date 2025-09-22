@@ -54,10 +54,10 @@ const Clientes = () => {
 
   return (
     <Container className="my-5">
-      <h2 className="mb-4">Clientes Registrados</h2>
+      <h2 className="mb-4">Usuarios registrados</h2>
 
       {clientes.length === 0 ? (
-        <Alert variant="info">No hay clientes registrados.</Alert>
+        <Alert variant="info">No hay usuarios registrados.</Alert>
       ) : (
         <Table responsive className="tabla-factura">
           <thead>
